@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Main;
 import com.mygdx.game.entites.Entity;
+import com.mygdx.game.tile.Tile;
 import com.mygdx.game.world.World;
 
 public class MainRenderer {
@@ -47,7 +48,7 @@ public class MainRenderer {
         {
             for (int ySqr = 0; ySqr < World.worldHeight; ySqr++)
             {
-                if (Main.world.getWorldArray()[xSqr][ySqr] != 0)
+                if (Main.world.getWorldArray()[xSqr][ySqr] == Tile.TileType.Rock)
                 {
                     batch.draw(img, xSqr*16, ySqr*16);
                 }

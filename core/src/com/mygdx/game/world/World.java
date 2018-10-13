@@ -1,6 +1,7 @@
 package com.mygdx.game.world;
 
 import com.mygdx.game.entites.Entity;
+import com.mygdx.game.tile.Tile;
 
 import java.util.ArrayList;
 
@@ -10,11 +11,11 @@ public class World {
     public static final int worldWidth = 500;
     public static final int worldHeight = 100;
 
-    public byte[][] getWorldArray() {
+    public Tile.TileType[][] getWorldArray() {
         return worldArray;
     }
 
-    private byte[][] worldArray = new byte[500][100];
+    private Tile.TileType[][] worldArray = new Tile.TileType[500][100];
 
     public ArrayList<Entity> getEntityArrayList() {
         return entityArrayList;
@@ -30,7 +31,10 @@ public class World {
         for (int xSqr = 0; xSqr < World.worldWidth; xSqr++) {
             for (int ySqr = 0; ySqr < World.worldHeight; ySqr++) {
                 if (Math.random() < 0.5) {
-                    worldArray[xSqr][ySqr] = 1;
+                    worldArray[xSqr][ySqr] = Tile.TileType.Rock;
+                }else{
+                    worldArray[xSqr][ySqr] = Tile.TileType.Sky;
+
                 }
 
             }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.mygdx.game.Main;
 import com.mygdx.game.entites.Entity;
 import com.mygdx.game.tile.Tile;
@@ -57,10 +58,11 @@ public class MainRenderer {
         for (Entity e : Main.worldGrid.getEntityArrayList()) {
             // Get current frame of animation for the current stateTime
             TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
-            Vector2 position = WorldGrid.playerEntity.physicsObject.getPosition();
+            Body physicsObj = WorldGrid.playerEntity.physicsObject;
+            Vector2 position = physicsObj.getPosition();
             float width = 1;
             float height = 2;
-            batch.draw(currentFrame, position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,20.0f); // Draw current frame at (50, 50)
+            batch.draw(currentFrame, position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
         }
     }
 

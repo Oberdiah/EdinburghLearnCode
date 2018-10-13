@@ -22,12 +22,12 @@ public class BlockForLoop extends Block {
     protected void functionality() {
         if (Interpreter.variables.get(forVariableName) == null) {
             Interpreter.variables.put(forVariableName,""+(Interpreter.resolveVariable(startVal)-1));
-            System.out.println("Entering for loop.  " + forVariableName + " has value " + (1+Integer.parseInt(Interpreter.variables.get(forVariableName))));
+            //System.out.println("Entering for loop.  " + forVariableName + " has value " + (1+Integer.parseInt(Interpreter.variables.get(forVariableName))));
         }
         //increment variable
         Interpreter.variables.put(forVariableName,""+(1+Integer.parseInt(Interpreter.variables.get(forVariableName))));
         if (Integer.parseInt(Interpreter.variables.get(forVariableName)) > Interpreter.resolveVariable(lastVal)) {
-            System.out.println("Leaving for loop.  " + forVariableName + " had value -1+" + Interpreter.variables.get(forVariableName));
+            //System.out.println("Leaving for loop.  " + forVariableName + " had value -1+" + Interpreter.variables.get(forVariableName));
             Interpreter.variables.put(forVariableName,null);
             useTempNext = true;
             setTempNext(cFN);

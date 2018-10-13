@@ -19,7 +19,7 @@ public class BlockIfLessThan extends Block {
         //System.out.println("iffy: " + possiblyLower + "( "+Interpreter.resolveVariable(possiblyLower)+" ) v "
         //        + possiblyHigher + "( "+Interpreter.resolveVariable(possiblyHigher)+" )");
         if (Interpreter.resolveVariable(possiblyLower) < Interpreter.resolveVariable(possiblyHigher)) {
-            System.out.println("Succeed");
+            //System.out.println("Succeed");
         }
         else {
             setTempNext(ifFalse);

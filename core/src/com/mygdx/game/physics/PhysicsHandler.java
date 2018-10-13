@@ -14,7 +14,7 @@ public class PhysicsHandler {
     private static Box2DDebugRenderer debugRenderer;
 
     public static void render() {
-        debugRenderer.render(world, Main.cam.combined);
+        //debugRenderer.render(world, Main.cam.combined);
     }
 
     public static Body groundBody;
@@ -23,7 +23,6 @@ public class PhysicsHandler {
         Box2D.init();
         world = new World(new Vector2(0, -10), true);
         debugRenderer = new Box2DDebugRenderer();
-        createPhysicsEntity(3, 3, 1, 2);
         createFloor();
     }
 

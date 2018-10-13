@@ -21,7 +21,7 @@ public class BlockPlaceBlock extends Block {
         //draw [blockName] at (posX,posY)
         int x = Interpreter.resolveVariable(posX);
         int y = Interpreter.resolveVariable(posY);
-        System.out.println("Place block at (" + x + "," + y + ")");
+        //System.out.println("Place block at (" + x + "," + y + ")");
 
         Main.worldGrid.setBlock(x, y, Tile.TileType.getTypeFromString(blockName));
     }

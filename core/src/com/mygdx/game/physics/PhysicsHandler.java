@@ -17,38 +17,47 @@ public class PhysicsHandler {
         debugRenderer.render(world, Main.cam.combined);
     }
 
+    public static Body groundBody;
+
     public static void init() {
         Box2D.init();
         world = new World(new Vector2(0, -10), true);
         debugRenderer = new Box2DDebugRenderer();
-
         createSphere();
         createFloor();
+    }
+
+    public static Fixture createCollisionBlock(int x, int y) {
+        int halfSize = MainRenderer.BLOCKPIXELSIZE / 2;
+        PolygonShape groundBox = new PolygonShape();
+        groundBox.setAsBox(halfSize, halfSize, new Vector2(x * MainRenderer.BLOCKPIXELSIZE + halfSize, y * MainRenderer.BLOCKPIXELSIZE + halfSize), 0.0f);
+        Fixture f = groundBody.createFixture(groundBox, 0.0f);
+        groundBox.dispose();
+        return f;
     }
 
     private static void createFloor() {
         BodyDef groundBodyDef = new BodyDef();
         groundBodyDef.position.set(new Vector2(0, 0));
-        Body groundBody = world.createBody(groundBodyDef);
+        groundBody = world.createBody(groundBodyDef);
 
         for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++) {
             for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++) {
-                if (Main.worldGrid.getWorldArray()[xSqr][ySqr] == Tile.TileType.Rock)
-                {
-                    int halfSize = MainRenderer.BLOCKPIXELSIZE/2;
-                    PolygonShape groundBox = new PolygonShape();
-                    groundBox.setAsBox(halfSize, halfSize, new Vector2(xSqr* MainRenderer.BLOCKPIXELSIZE+halfSize, ySqr * MainRenderer.BLOCKPIXELSIZE+halfSize), 0.0f);
-                    groundBody.createFixture(groundBox, 0.0f);
-                    groundBox.dispose();
+                if (ySqr == 0) {
+                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.Rock);
                 }
+                else
+                {
+                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.Sky);
 
+                }
             }
         }
 
     }
 
     public static void tick() {
-        world.step(1/60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
     }
 
     private static void createSphere() {
@@ -67,7 +76,7 @@ public class PhysicsHandler {
         fixtureDef.friction = 0.4f;
         fixtureDef.restitution = 1.0f;
 
-        Fixture fixture = body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef);
 
         circle.dispose();
     }

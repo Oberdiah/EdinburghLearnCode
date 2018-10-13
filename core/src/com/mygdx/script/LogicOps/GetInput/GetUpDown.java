@@ -5,9 +5,9 @@ import com.mygdx.script.LogicOps.LogicExp;
 import com.mygdx.script.Utils.Exception;
 
 
-public class GetRight extends LogicExp {
+public class GetUpDown extends LogicExp {
     final public Boolean evaluate(){
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             return true;
         }
         return false;

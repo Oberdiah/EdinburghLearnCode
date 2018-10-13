@@ -5,10 +5,10 @@ import com.mygdx.script.LogicOps.LogicExp;
 import com.mygdx.script.Utils.Exception;
 
 
-public class GetW extends LogicExp {
+public class GetRightPressed extends LogicExp {
     final public Boolean evaluate(){
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-           return true;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            return true;
         }
         return false;
     }

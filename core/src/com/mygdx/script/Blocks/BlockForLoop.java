@@ -2,6 +2,8 @@ package com.mygdx.script.Blocks;
 
 import com.mygdx.script.TestScript.Interpreter;
 
+import java.util.function.Consumer;
+
 public class BlockForLoop extends Block {
 
     private String forVariableName;
@@ -27,7 +29,7 @@ public class BlockForLoop extends Block {
         Interpreter.variables.put(forVariableName,""+(1+Integer.parseInt(Interpreter.variables.get(forVariableName))));
         if (Integer.parseInt(Interpreter.variables.get(forVariableName)) >= Integer.parseInt(lastVal)) {
             System.out.println("Leaving for loop.  " + forVariableName + " had value " + Interpreter.variables.get(forVariableName));
-            Interpreter.variables.put(forVariableName,null);
+            lazarusCommand.add( (Integer seven) -> Interpreter.variables.put(forVariableName,null));
             setTempNext(cFN);
         }
         else {

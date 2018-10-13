@@ -32,7 +32,7 @@ public class HandleInput {
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             cam.rotate(0.5f, 0, 0, 1);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             Main.codemode  = !Main.codemode;
         }
 

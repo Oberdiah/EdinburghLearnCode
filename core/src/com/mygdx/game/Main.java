@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
@@ -171,7 +172,7 @@ public class Main extends ApplicationAdapter {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setProjectionMatrix(Main.cam.combined);
-            for (Block b : MasterClass.blocks) {
+            for (Block b : new ArrayList<>(MasterClass.blocks)) {
                 b.draw();
             }
             //Circle TEMP = getAllNodes().get(0).boundCircle();

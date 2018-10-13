@@ -31,7 +31,7 @@ public class Main extends ApplicationAdapter {
 
     public static HandleInput inputHandler;
 
-    public static boolean codemode = false;
+    public static boolean codemode = true;
 
 	@Override
 	public void create () {

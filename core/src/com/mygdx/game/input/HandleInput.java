@@ -36,9 +36,6 @@ public class HandleInput {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             Main.codemode = !Main.codemode;
         }
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-//            Main.codemode = !Main.codemode;
-//        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             Interpreter.initializeInterpreter();
             Interpreter.interpret();

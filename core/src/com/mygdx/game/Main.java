@@ -196,7 +196,8 @@ public class Main extends ApplicationAdapter {
             MasterClass.batch.begin();
             MasterClass.batch.setProjectionMatrix(Main.cam.combined);
 
-            for (Block b : MasterClass.blocks) {
+
+            for (Block b : new ArrayList<Block>(MasterClass.blocks)) {
                 b.drawText();
             }
             MasterClass.batch.end();

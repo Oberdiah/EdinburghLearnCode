@@ -20,7 +20,7 @@ public class BlockApplyForceToPlayer extends Block {
         int x = Interpreter.resolveVariable(fX);
         int y = Interpreter.resolveVariable(fY);
 
-        //System.out.println("Yeah");
+        System.out.println("Yeah");
         Vector2 center = WorldGrid.playerEntity.physicsObject.getWorldCenter();
         WorldGrid.playerEntity.physicsObject.applyLinearImpulse(x,y,center.x,center.y,true);
     }

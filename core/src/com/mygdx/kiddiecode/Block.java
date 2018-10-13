@@ -41,6 +41,11 @@ public class Block {
         else {
             shupooey.setColor(1, 0.25f, 0, 1);
         }
+        if (isHighlighted()) {
+            shupooey.getColor().mul(0.5f);
+
+        }
+
         shupooey.rect(posX, progCoord(posY), width, height);
         //now draw outgoing and incoming nodes
         for (Node n : incomingNodes) {

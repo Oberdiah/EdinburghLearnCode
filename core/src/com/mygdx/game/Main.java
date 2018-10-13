@@ -47,6 +47,7 @@ public class Main extends ApplicationAdapter {
     Drawable touchKnob;
     Touchpad touchpad;
     Stage stage;
+    SpriteBatch sb;
 
 
 	@Override
@@ -59,6 +60,25 @@ public class Main extends ApplicationAdapter {
         inputHandler = new HandleInput();
 
         PhysicsHandler.init();
+
+        touchpadSkin = new Skin();
+        touchpadSkin.add("touchBackground", new Texture("bigcircle.png"));
+        touchpadSkin.add("touchKnob", new Texture("smallcircle.png"));
+
+        touchpadStyle = new Touchpad.TouchpadStyle();
+
+        touchpadBackground = touchpadSkin.getDrawable("touchBackground");
+        touchKnob = touchpadSkin.getDrawable("touchKnob");
+
+        touchpadStyle.background = touchpadBackground;
+        touchpadStyle.knob = touchKnob;
+
+        touchpad = new Touchpad(0, touchpadStyle);
+        touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+
+        stage = new Stage();
+        stage.addActor(touchpad);
+
 
         //KiddieCode stuff
         Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
@@ -83,24 +103,7 @@ public class Main extends ApplicationAdapter {
 
 
 
-        touchpadSkin = new Skin();
-        touchpadSkin.add("touchBackground", new Texture("bigcircle.png"));
-        touchpadSkin.add("touchKnob", new Texture("smallcircle.png"));
 
-        touchpadStyle = new Touchpad.TouchpadStyle();
-
-        touchpadBackground = touchpadSkin.getDrawable("touchBackground");
-        touchKnob = touchpadSkin.getDrawable("touchKnob");
-
-        touchpadStyle.background = touchpadBackground;
-        touchpadStyle.knob = touchKnob;
-
-        touchpad = new Touchpad(0, touchpadStyle);
-        touchpad.setBounds(0, 0, 150, 150);
-
-        stage = new Stage();
-        stage.addActor(touchpad);
-        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -118,11 +121,13 @@ public class Main extends ApplicationAdapter {
             tick.tick();
 
             //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+            Gdx.input.setInputProcessor(stage);
             stage.act();
             stage.draw();
         }
         else {
+            Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
+
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -161,12 +166,15 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
+
+
         cam.viewportWidth = 30f;
         cam.viewportHeight = 30f * height/width;
         if (codemode) {
             cam.zoom = HandleInput.CODE_ZOOM;
         }
         cam.update();
+        stage.getViewport().update(width, height);
     }
 
 	@Override

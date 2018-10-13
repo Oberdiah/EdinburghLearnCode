@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.Main;
+import com.mygdx.script.TestScript.Interpreter;
 
 public class HandleInput {
 
@@ -26,15 +27,22 @@ public class HandleInput {
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             cam.translate(0, 3, 0);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            cam.rotate(-0.5f, 0, 0, 1);
-        }
+//        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+//            cam.rotate(-0.5f, 0, 0, 1);
+//        }
 //        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
 //            cam.rotate(0.5f, 0, 0, 1);
 //        }
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-//            Main.codemode  = !Main.codemode;
-//        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            Main.codemode = !Main.codemode;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            Main.codemode = !Main.codemode;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            Interpreter.initializeInterpreter();
+            Interpreter.interpret();
+        }
 
     }
 }

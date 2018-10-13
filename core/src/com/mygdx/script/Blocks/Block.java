@@ -10,5 +10,7 @@ abstract public class Block {
         }
     }
 
+    public void setNext(Block n) {next = n;}
+
     protected abstract void functionality();
 }

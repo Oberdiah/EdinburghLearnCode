@@ -92,8 +92,8 @@ public class HandleInput {
 //        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             Main.codemode = !Main.codemode;
-            if (Main.codemode == true) {Main.cam.zoom = codeZoom;}
-            else {Main.cam.zoom = gameZoom;}
+            if (Main.codemode == true) {gameZoom = Main.cam.zoom;Main.cam.zoom = codeZoom;}
+            else {codeZoom = Main.cam.zoom;Main.cam.zoom = gameZoom;}
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             Interpreter.initializeInterpreter();

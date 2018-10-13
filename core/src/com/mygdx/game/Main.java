@@ -114,6 +114,7 @@ public class Main extends ApplicationAdapter {
         Main.inputHandler.handleInput(Main.cam);
         Main.cam.update();
 	    if (!codemode) {
+            Gdx.input.setInputProcessor(stage);
             Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             PhysicsHandler.render();
@@ -127,7 +128,6 @@ public class Main extends ApplicationAdapter {
         }
         else {
             Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
-
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

@@ -56,13 +56,13 @@ public class Main extends ApplicationAdapter {
         Block.font = MasterClass.fontyWonty;
         MasterClass.blocks = new java.util.ArrayList<Block>();
         MasterClass.blocks.add(new Block(50,200,BlockTypes.ONLOAD_TRIGGER));
-        MasterClass.blocks.add(new Block(100,350,BlockTypes.IF_LESS_THAN));
-        MasterClass.blocks.add(new Block(150,200,BlockTypes.LOOP_FROM_TO));
-        MasterClass.blocks.add(new Block(200,350,BlockTypes.LOOP_FROM_TO));
-        MasterClass.blocks.add(new Block(250,200,BlockTypes.PLACE_BLOCK));
-        MasterClass.blocks.add(new Block(300,350,BlockTypes.PLACE_PLAYER));
-        MasterClass.blocks.add(new Block(350,200,BlockTypes.ONTICK_TRIGGER));
-        MasterClass.blocks.add(new Block(400,350,BlockTypes.MOVE_PLAYER_BY));
+        MasterClass.blocks.add(new Block(150,350,BlockTypes.IF_LESS_THAN));
+        MasterClass.blocks.add(new Block(250,200,BlockTypes.LOOP_FROM_TO));
+        MasterClass.blocks.add(new Block(350,350,BlockTypes.LOOP_FROM_TO));
+        MasterClass.blocks.add(new Block(450,200,BlockTypes.PLACE_BLOCK));
+        MasterClass.blocks.add(new Block(550,350,BlockTypes.PLACE_PLAYER));
+        MasterClass.blocks.add(new Block(650,200,BlockTypes.ONTICK_TRIGGER));
+        MasterClass.blocks.add(new Block(750,350,BlockTypes.MOVE_PLAYER_BY));
 
         Main.cam.zoom = 21.329294f;//do this if we start in the code section
     }

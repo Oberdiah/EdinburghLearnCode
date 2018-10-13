@@ -1,9 +1,9 @@
 package com.mygdx.game.physics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Main;
-import com.mygdx.game.rendering.MainRenderer;
 import com.mygdx.game.tile.Tile;
 import com.mygdx.game.world.WorldGrid;
 
@@ -23,14 +23,13 @@ public class PhysicsHandler {
         Box2D.init();
         world = new World(new Vector2(0, -10), true);
         debugRenderer = new Box2DDebugRenderer();
-        createSphere();
+        createPhysicsEntity(3, 3, 1, 2);
         createFloor();
     }
 
     public static Fixture createCollisionBlock(int x, int y) {
-        int halfSize = MainRenderer.BLOCKPIXELSIZE / 2;
         PolygonShape groundBox = new PolygonShape();
-        groundBox.setAsBox(halfSize, halfSize, new Vector2(x * MainRenderer.BLOCKPIXELSIZE + halfSize, y * MainRenderer.BLOCKPIXELSIZE + halfSize), 0.0f);
+        groundBox.setAsBox(0.5f, 0.5f, new Vector2(x+0.5f, y + 0.5f), 0.0f);
         Fixture f = groundBody.createFixture(groundBox, 0.0f);
         groundBox.dispose();
         return f;
@@ -57,27 +56,35 @@ public class PhysicsHandler {
     }
 
     public static void tick() {
-        world.step(1 / 60f, 6, 2);
+        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
     }
 
-    private static void createSphere() {
+    public static Body createPhysicsEntity(int x, int y, int width, int height) {
+        return createPhysicsEntity(x,y,width,height,false);
+    }
+
+    public static Body createPhysicsEntity(int x, int y, int width, int height, boolean fixedRotation) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(20, 1000);
+        bodyDef.position.set(x, y);
 
         Body body = world.createBody(bodyDef);
 
-        CircleShape circle = new CircleShape();
-        circle.setRadius(6f);
+        PolygonShape groundBox = new PolygonShape();
+        groundBox.setAsBox(width/2.0f, height/2.0f);
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = circle;
+        fixtureDef.shape = groundBox;
         fixtureDef.density = 0.5f;
         fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 1.0f;
+        fixtureDef.restitution = 0.1f;
+
+        body.setFixedRotation(fixedRotation);
 
         body.createFixture(fixtureDef);
 
-        circle.dispose();
+        groundBox.dispose();
+
+        return body;
     }
 }

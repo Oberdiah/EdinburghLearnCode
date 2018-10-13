@@ -13,8 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
@@ -55,11 +53,10 @@ public class Main extends ApplicationAdapter {
         renderer = new MainRenderer();
         renderer.init();
         Main.worldGrid = new WorldGrid();
+        PhysicsHandler.init();
         Main.worldGrid.init();
         tick = new Ticker();
         inputHandler = new HandleInput();
-
-        PhysicsHandler.init();
 
         touchpadSkin = new Skin();
         touchpadSkin.add("touchBackground", new Texture("bigcircle.png"));

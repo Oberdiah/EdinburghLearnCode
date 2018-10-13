@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
@@ -38,17 +40,12 @@ public class Main extends ApplicationAdapter {
 
     public static boolean codemode = true;
 
-    Touchpad touchPad;
-    Touchpad.TouchpadStyle style;
-    TextureRegionDrawable background;
-    TextureRegionDrawable knobRegion;
-    Texture texture;
-    Texture killer;
-    SpriteBatch batch;
+    Skin touchpadSkin;
+    Touchpad.TouchpadStyle touchpadStyle;
+    Drawable touchpadBackground;
+    Drawable touchKnob;
+    Touchpad touchpad;
     Stage stage;
-    public static int speed = 3;
-    int x = 0;
-    int y = 0;
 
 
 	@Override
@@ -80,31 +77,28 @@ public class Main extends ApplicationAdapter {
         MasterClass.blocks.add(new Block(300,350,BlockTypes.PLACE_PLAYER));
         MasterClass.blocks.add(new Block(350,200,BlockTypes.ONTICK_TRIGGER));
         MasterClass.blocks.add(new Block(400,350,BlockTypes.MOVE_PLAYER_BY));
-        
 
-        //onscreen joystick
+
+        touchpadSkin = new Skin();
+        touchpadSkin.add("touchBackground", new Texture("bigcircle.png"));
+        touchpadSkin.add("touchKnob", new Texture("smallcircle.png"));
+
+        touchpadStyle = new Touchpad.TouchpadStyle();
+
+        touchpadBackground = touchpadSkin.getDrawable("touchBackground");
+        touchKnob = touchpadSkin.getDrawable("touchKnob");
+
+        touchpadStyle.background = touchpadBackground;
+        touchpadStyle.knob = touchKnob;
+
+        touchpad = new Touchpad(0, touchpadStyle);
+        touchpad.setBounds(0, 0, 150, 150);
+
         stage = new Stage();
-        texture = new Texture("skyblock.png");
-        killer = new Texture("rockblock.png");
-        background = new TextureRegionDrawable(new TextureRegion(texture, 0, 0,128,128));
-        knobRegion = new TextureRegionDrawable(new TextureRegion(texture,128,0,128,128));
-        style = new Touchpad.TouchpadStyle(background, knobRegion);
-        touchPad = new Touchpad(15, style);
-        touchPad.setBounds(0, 0, 150, 150);
-        batch = new SpriteBatch();
-        stage.addActor(touchPad);
+        stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
     }
 
-    public void update(){
-        if(touchPad.isTouched()){
-            x += touchPad.getKnobPercentX()*speed;
-            y += touchPad.getKnobPercentY()*speed;
-
-        }
-
-        Main.cam.zoom = 21.329294f;//do this if we start in the code section
-    }
 
 	@Override
 	public void render () {
@@ -115,13 +109,11 @@ public class Main extends ApplicationAdapter {
             Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             PhysicsHandler.render();
-
             renderer.render();
             tick.tick();
-            update();
-            batch.begin();
-            batch.draw(killer, x,y, 70,70);
-            batch.end();
+
+            //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
             stage.act();
             stage.draw();
         }

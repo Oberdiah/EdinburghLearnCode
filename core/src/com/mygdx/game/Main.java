@@ -173,17 +173,18 @@ public class Main extends ApplicationAdapter {
                 }
             });
 
-            touchpad.addListener(new ClickListener(){
+            touchpad.addListener(new ClickListener() {
                 @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     touchpad.getStyle().knob = press;
                     return true;
                 }
+
                 @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     touchpad.getStyle().knob = touchKnob;
                 }
-            } );
+            });
 
 //            if (isStick1Hold){
 //
@@ -212,6 +213,8 @@ public class Main extends ApplicationAdapter {
             batch.end();
             //stage.act();
             //stage.draw();
+
+        }else{
 
             Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
             Gdx.gl.glClearColor(1, 1, 1, 1);

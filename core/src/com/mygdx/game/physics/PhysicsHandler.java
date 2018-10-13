@@ -44,11 +44,11 @@ public class PhysicsHandler {
         for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++) {
             for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++) {
                 if (ySqr == 0) {
-                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.Rock);
+                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.ROCK);
                 }
                 else
                 {
-                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.Sky);
+                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.SKY);
 
                 }
             }

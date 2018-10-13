@@ -31,7 +31,7 @@ public class HandleInput {
                     int blockPressedX = (int) (vec.x/ MainRenderer.BLOCKPIXELSIZE);
                     int blockPressedY = (int) (vec.y/ MainRenderer.BLOCKPIXELSIZE);
 
-                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.Rock);
+                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.ROCK);
 
                 }
                 wasTouched0 = true;
@@ -49,7 +49,7 @@ public class HandleInput {
                     int blockPressedX = (int) (vec.x/ MainRenderer.BLOCKPIXELSIZE);
                     int blockPressedY = (int) (vec.y/ MainRenderer.BLOCKPIXELSIZE);
 
-                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.Sky);
+                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.SKY);
 
                 }
                 wasTouched1 = true;

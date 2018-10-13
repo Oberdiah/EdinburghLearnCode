@@ -1,5 +1,9 @@
 package com.mygdx.script.Blocks;
 
+import com.mygdx.game.Main;
+import com.mygdx.game.tile.Tile;
+import com.mygdx.script.TestScript.Interpreter;
+
 public class BlockPlaceBlock extends Block {
 
     private String blockName;
@@ -15,6 +19,12 @@ public class BlockPlaceBlock extends Block {
     @Override
     protected void functionality() {
         //draw [blockName] at (posX,posY)
-        
+        int x = Interpreter.resolveVariable(posX);
+        int y = Interpreter.resolveVariable(posY);
+
+        Main.worldGrid.setBlock(x, y, Tile.TileType.getTypeFromString(blockName));
     }
+
+
+
 }

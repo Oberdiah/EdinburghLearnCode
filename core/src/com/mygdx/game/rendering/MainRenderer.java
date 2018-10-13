@@ -49,7 +49,7 @@ public class MainRenderer {
         {
             for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++)
             {
-                if (Main.worldGrid.getWorldArray()[xSqr][ySqr].type == Tile.TileType.Rock)
+                if (Main.worldGrid.getWorldArray()[xSqr][ySqr].type == Tile.TileType.ROCK)
                 {
                     batch.draw(rockblock, xSqr*MainRenderer.BLOCKPIXELSIZE, ySqr*MainRenderer.BLOCKPIXELSIZE);
                 }

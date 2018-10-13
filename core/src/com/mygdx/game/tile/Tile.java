@@ -4,8 +4,23 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 
 public class Tile {
     public enum TileType {
-        Rock,
-        Sky
+        ROCK("Rock"),
+        SKY("Sky");
+
+        String string;
+
+        TileType(String s) {
+            string = s;
+        }
+
+        public static TileType getTypeFromString(String s) {
+            for (TileType t : TileType.values()) {
+                if (t.string.equals(s)) {
+                    return t;
+                }
+            }
+            return null;
+        }
     }
 
     public TileType type;
@@ -19,10 +34,10 @@ public class Tile {
     public  static  boolean Blocks(TileType t){
         switch (t){
 
-            case Rock:
+            case ROCK:
                 return  true;
 
-            case Sky:
+            case SKY:
             default:
                 return false;
 

@@ -10,6 +10,11 @@ public class Node {
     private Node nodeConnectedTo;
     private boolean isInputNodeVar;
 
+    public Block getLinked() {
+        if (nodeConnectedTo == null) {return null;}
+        return nodeConnectedTo.parentBlock;
+    }
+
     public Node(Block b,float x,float y,boolean isIncoming) {
         parentBlock = b;
         posX = x;

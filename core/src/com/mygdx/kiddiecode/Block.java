@@ -26,6 +26,7 @@ public class Block {
     private java.util.Map<String,com.badlogic.gdx.math.Rectangle> innerNodesEditBoundingBoxes;
     public java.util.Map<String,com.badlogic.gdx.math.Rectangle> getInnerNodesEditBoundingBoxes() {return innerNodesEditBoundingBoxes;}
 
+    public BlockTypes getType() {return type;}
 
     public static float progCoord(float x) {//returns programming coordinates instead of mathematical
         return Gdx.graphics.getHeight() - x;

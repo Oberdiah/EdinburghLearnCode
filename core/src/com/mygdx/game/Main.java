@@ -155,7 +155,6 @@ public class Main extends ApplicationAdapter {
                     // This is run when anything is changed on this actor.
                     float deltaX = ((Touchpad) actor).getKnobPercentX();
                     float deltaY = ((Touchpad) actor).getKnobPercentY();
-                    System.out.println(deltaX+" "+deltaY);
                 }
             });
             //Gdx.input.setInputProcessor(stage);

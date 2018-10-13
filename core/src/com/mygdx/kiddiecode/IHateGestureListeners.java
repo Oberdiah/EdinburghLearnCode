@@ -27,13 +27,13 @@ public class IHateGestureListeners implements GestureListener {
     public boolean touchDown(float x, float y, int pointer, int button) {
         startX = x;
         startY = y;
-        java.util.ArrayList<Block> transcontinentalRailroad = connecticut.getBlocks();
-        java.util.ArrayList<Node> phillyCheeseSteak = connecticut.getAllNodes();
+        java.util.ArrayList<Block> blocks = connecticut.getBlocks();
+        java.util.ArrayList<Node> nodes = connecticut.getAllNodes();
         if (MasterClass.getStartTerminalNode() != null) {
             MasterClass.getStartTerminalNode().delight();
             MasterClass.setStartTerminalNode(null);
         }
-        for (Node node : phillyCheeseSteak) {
+        for (Node node : nodes) {
             if ( (Intersector.overlaps(node.boundCircle(),pointToRect(startX,Block.progCoord(startY))) && !isCurrentlyDraggingSomething)) {
 
                 System.out.println("Found node");
@@ -44,7 +44,7 @@ public class IHateGestureListeners implements GestureListener {
                 break;
             }
         }
-        for (Block block : transcontinentalRailroad) {
+        for (Block block : blocks) {
             java.util.Map<String,com.badlogic.gdx.math.Rectangle> bboxes = block.getInnerNodesEditBoundingBoxes();
             for (String editable : bboxes.keySet()) {
                 if ( (Intersector.overlaps(bboxes.get(editable),pointToRect(startX,startY)) && !isCurrentlyDraggingSomething)) {
@@ -170,6 +170,7 @@ public class IHateGestureListeners implements GestureListener {
 
     @Override
     public boolean zoom(float originalDistance, float currentDistance){
+        Main.cam.zoom *= currentDistance/originalDistance;
         return false;
     }
 

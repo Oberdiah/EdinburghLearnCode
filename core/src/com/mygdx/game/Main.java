@@ -59,6 +59,10 @@ public class Main extends ApplicationAdapter {
     public static float p1deltaY = 0;
 
 
+    public static float p2deltaX = 0;
+    public static float p2deltaY = 0;
+
+
     @Override
     public void create() {
         renderer = new MainRenderer();
@@ -153,8 +157,9 @@ public class Main extends ApplicationAdapter {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     // This is run when anything is changed on this actor.
-                    float deltaX = ((Touchpad) actor).getKnobPercentX();
-                    float deltaY = ((Touchpad) actor).getKnobPercentY();
+                    p2deltaX = ((Touchpad) actor).getKnobPercentX();
+                    p2deltaY = ((Touchpad) actor).getKnobPercentY();
+
                 }
             });
             //Gdx.input.setInputProcessor(stage);

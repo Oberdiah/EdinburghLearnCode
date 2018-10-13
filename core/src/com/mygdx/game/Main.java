@@ -163,10 +163,10 @@ public class Main extends ApplicationAdapter {
     public void resize(int width, int height) {
         cam.viewportWidth = 30f;
         cam.viewportHeight = 30f * height/width;
-        cam.update();
         if (codemode) {
             cam.zoom = HandleInput.CODE_ZOOM;
         }
+        cam.update();
     }
 
 	@Override

@@ -10,6 +10,7 @@ import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.rendering.MainRenderer;
 import com.mygdx.game.tick.Ticker;
 import com.mygdx.game.world.WorldGrid;
+import com.mygdx.kiddiecode.MasterClass;
 
 public class Main extends ApplicationAdapter {
 

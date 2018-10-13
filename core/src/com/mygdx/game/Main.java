@@ -46,6 +46,7 @@ public class Main extends ApplicationAdapter {
     Drawable touchpadBackground;
     Drawable touchKnob;
     Touchpad touchpad;
+    Touchpad touchpad2;
     Stage stage;
     SpriteBatch sb;
 
@@ -78,10 +79,14 @@ public class Main extends ApplicationAdapter {
         touchpadStyle.knob = touchKnob;
 
         touchpad = new Touchpad(0, touchpadStyle);
-        touchpad.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+
+        touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+        touchpad2 = new Touchpad(0, touchpadStyle);
+        touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/5, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.addActor(touchpad);
+        stage.addActor(touchpad2);
 
 
         //KiddieCode stuff
@@ -109,12 +114,16 @@ public class Main extends ApplicationAdapter {
     }
 
 
-    @Override
-    public void render() {
-        //toggle this to swap between the platformer sandbox and the scripting sandbox
+
+	@Override
+	public void render () {
+	    //toggle this to swap between the platformer sandbox and the scripting sandbox
+
         Main.inputHandler.handleInput(Main.cam);
         Main.cam.update();
-        if (!codemode) {
+	    if (!codemode) {
+
+
             Gdx.input.setInputProcessor(stage);
             Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -133,11 +142,20 @@ public class Main extends ApplicationAdapter {
 
                 }
             });
-            Gdx.input.setInputProcessor(stage);
+            touchpad2.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    // This is run when anything is changed on this actor.
+                    float deltaX = ((Touchpad) actor).getKnobPercentX();
+                    float deltaY = ((Touchpad) actor).getKnobPercentY();
+                    System.out.println(deltaX+" "+deltaY);
+                }
+            });
+            //Gdx.input.setInputProcessor(stage);
             SpriteBatch batch = new SpriteBatch();
-            touchpad.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
             batch.begin();
-            touchpad.draw(batch, 0.5f);
+            touchpad.draw(batch, 0.6f);
+            touchpad2.draw(batch, 0.6f);
             batch.end();
             //stage.act();
             //stage.draw();
@@ -179,8 +197,9 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-
-
+        touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+        touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/5, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+        
         cam.viewportWidth = 30f;
         cam.viewportHeight = 30f * height / width;
         if (codemode) {

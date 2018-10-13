@@ -151,8 +151,20 @@ public class Main extends ApplicationAdapter {
                     System.out.println(deltaX+" "+deltaY);
                 }
             });
+
+            touchpad2.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    // This is run when anything is changed on this actor.
+                    float deltaX = ((Touchpad) actor).getKnobPercentX();
+                    float deltaY = ((Touchpad) actor).getKnobPercentY();
+                    System.out.println(deltaX+" "+deltaY);
+                }
+            });
             //Gdx.input.setInputProcessor(stage);
             SpriteBatch batch = new SpriteBatch();
+            //touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+
             batch.begin();
             touchpad.draw(batch, 0.6f);
             touchpad2.draw(batch, 0.6f);

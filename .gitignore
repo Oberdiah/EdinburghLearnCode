@@ -131,3 +131,8 @@ local.properties
 settings.gradle
 android/build.gradle
 desktop/out/
+/gradle.properties
+/build.gradle
+/gradlew
+/settings.gradle
+/gradlew.bat

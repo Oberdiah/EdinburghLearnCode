@@ -10,10 +10,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
@@ -43,12 +46,17 @@ public class Main extends ApplicationAdapter {
 
     Skin touchpadSkin;
     Touchpad.TouchpadStyle touchpadStyle;
+    Touchpad.TouchpadStyle touchpadStyle2;
     Drawable touchpadBackground;
     Drawable touchKnob;
+    Drawable press;
     Touchpad touchpad;
     Touchpad touchpad2;
     Stage stage;
     SpriteBatch sb;
+    boolean isStick1Hold;
+    boolean isStick2Hold;
+    int animeTick;
 
 
 	@Override
@@ -61,21 +69,30 @@ public class Main extends ApplicationAdapter {
         tick = new Ticker();
         inputHandler = new HandleInput();
 
+        //animeTick = 20;
+
         touchpadSkin = new Skin();
         touchpadSkin.add("touchBackground", new Texture("bigcircle.png"));
         touchpadSkin.add("touchKnob", new Texture("smallcircle.png"));
+        touchpadSkin.add("pressed", new Texture("skyblock.png"));
 
         touchpadStyle = new Touchpad.TouchpadStyle();
+        touchpadStyle2 = new Touchpad.TouchpadStyle();
 
         touchpadBackground = touchpadSkin.getDrawable("touchBackground");
         touchKnob = touchpadSkin.getDrawable("touchKnob");
+        press = touchpadSkin.getDrawable("pressed");
+
+        touchpadStyle2.background = touchpadBackground;
+        touchpadStyle2.knob = touchKnob;
 
         touchpadStyle.background = touchpadBackground;
         touchpadStyle.knob = touchKnob;
 
         touchpad = new Touchpad(0, touchpadStyle);
+        touchpad.set
         touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
-        touchpad2 = new Touchpad(0, touchpadStyle);
+        touchpad2 = new Touchpad(0, touchpadStyle2);
         touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/5, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
@@ -117,6 +134,7 @@ public class Main extends ApplicationAdapter {
 
         Main.inputHandler.handleInput(Main.cam);
         Main.cam.update();
+
 	    if (!codemode) {
 
 
@@ -127,6 +145,7 @@ public class Main extends ApplicationAdapter {
             renderer.render();
             tick.tick();
 
+
             //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             touchpad.addListener(new ChangeListener() {
                 @Override
@@ -134,16 +153,38 @@ public class Main extends ApplicationAdapter {
                     // This is run when anything is changed on this actor.
                     float deltaX = ((Touchpad) actor).getKnobPercentX();
                     float deltaY = ((Touchpad) actor).getKnobPercentY();
-                    System.out.println(deltaX+" "+deltaY);
+                    //isStick1Hold = true;
+                    //System.out.println(deltaX+" "+deltaY);
                 }
             });
+
+            touchpad.addListener(new ClickListener(){
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                    touchpad.getStyle().knob = press;
+                    return true;
+                }
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                    touchpad.getStyle().knob = touchKnob;
+                }
+            } );
+
+//            if (isStick1Hold){
+//
+//            }else {
+//                touchpad.getStyle().knob = touchKnob;
+//            }
+
+
             touchpad2.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     // This is run when anything is changed on this actor.
                     float deltaX = ((Touchpad) actor).getKnobPercentX();
                     float deltaY = ((Touchpad) actor).getKnobPercentY();
-                    System.out.println(deltaX+" "+deltaY);
+                    isStick2Hold = true;
+                    //System.out.println(deltaX+" "+deltaY);
                 }
             });
             //Gdx.input.setInputProcessor(stage);
@@ -155,6 +196,11 @@ public class Main extends ApplicationAdapter {
             batch.end();
             //stage.act();
             //stage.draw();
+            animeTick -= 1;
+            if (animeTick <= 0) {
+                isStick1Hold = false;
+                animeTick = 5;
+            }
         }
         else {
             Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));

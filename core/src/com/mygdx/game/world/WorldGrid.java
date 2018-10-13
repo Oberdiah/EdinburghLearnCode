@@ -4,7 +4,7 @@ import com.mygdx.game.entites.Entity;
 
 import java.util.ArrayList;
 
-public class World {
+public class WorldGrid {
     private ArrayList<Entity> entityArrayList = new ArrayList<Entity>();
 
     public static final int worldWidth = 500;
@@ -27,8 +27,8 @@ public class World {
     public void init() {
         entityArrayList.add(new Entity());
 
-        for (int xSqr = 0; xSqr < World.worldWidth; xSqr++) {
-            for (int ySqr = 0; ySqr < World.worldHeight; ySqr++) {
+        for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++) {
+            for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++) {
                 if (Math.random() < 0.5) {
                     worldArray[xSqr][ySqr] = 1;
                 }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Main;
 import com.mygdx.game.entites.Entity;
-import com.mygdx.game.world.World;
+import com.mygdx.game.world.WorldGrid;
 
 public class MainRenderer {
     SpriteBatch batch;
@@ -37,17 +37,17 @@ public class MainRenderer {
     }
 
     private void renderEntities() {
-        for (Entity e : Main.world.getEntityArrayList()) {
+        for (Entity e : Main.worldGrid.getEntityArrayList()) {
             e.sprite.draw(batch);
         }
     }
 
     private void renderWorld() {
-        for (int xSqr = 0; xSqr < World.worldWidth; xSqr++)
+        for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++)
         {
-            for (int ySqr = 0; ySqr < World.worldHeight; ySqr++)
+            for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++)
             {
-                if (Main.world.getWorldArray()[xSqr][ySqr] != 0)
+                if (Main.worldGrid.getWorldArray()[xSqr][ySqr] != 0)
                 {
                     batch.draw(img, xSqr*16, ySqr*16);
                 }

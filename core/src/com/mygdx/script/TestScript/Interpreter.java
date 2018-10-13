@@ -2,10 +2,7 @@ package com.mygdx.script.TestScript;
 
 import com.mygdx.kiddiecode.BlockTypes;
 import com.mygdx.kiddiecode.MasterClass;
-import com.mygdx.script.Blocks.BlockForLoop;
-import com.mygdx.script.Blocks.BlockIfLessThan;
-import com.mygdx.script.Blocks.BlockOnLoad;
-import com.mygdx.script.Blocks.BlockPlaceBlock;
+import com.mygdx.script.Blocks.*;
 
 
 public class Interpreter {
@@ -76,6 +73,16 @@ public class Interpreter {
                         innerNodes.get("[PosY]")
                 );
                 break;
+            case PLACE_PLAYER:
+                yB = new BlockPlacePlayer(
+                        innerNodes.get("[PosX]"),
+                        innerNodes.get("[PosY]")
+                );
+            case MOVE_PLAYER_BY:
+                yB = new BlockApplyForceToPlayer(
+                        innerNodes.get("[MoveX]"),
+                        innerNodes.get("[MoveY]")
+                );
         }
         //yB is yueyangBlock, bB is baileyBlock
         if (yB == null) {

@@ -45,7 +45,7 @@ public class MainRenderer {
 
         renderEntities();
 
-        System.out.println(Gdx.graphics.getFramesPerSecond() + "fps");
+        //System.out.println(Gdx.graphics.getFramesPerSecond() + "fps");
 
         batch.end();
     }

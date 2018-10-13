@@ -3,6 +3,7 @@ package com.mygdx.script.TestScript;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.Main;
+import com.mygdx.game.world.WorldGrid;
 import com.mygdx.kiddiecode.BlockTypes;
 import com.mygdx.kiddiecode.MasterClass;
 import com.mygdx.script.Blocks.*;
@@ -11,7 +12,7 @@ import com.mygdx.script.Blocks.*;
 public class Interpreter {
     //This is the class that reads the script code and interacts with the world
     public static com.mygdx.script.Blocks.Block startBlock = null;
-    public static com.mygdx.script.Blocks.Block tickBlock = null;
+    public static java.util.ArrayList<com.mygdx.script.Blocks.Block> tickBlocks = new java.util.ArrayList<com.mygdx.script.Blocks.Block>();
 
     public static int resolveVariable(String potential) {
 
@@ -44,15 +45,14 @@ public class Interpreter {
     public static void initializeInterpreter() {
         //grab all code blocks
         java.util.ArrayList<com.mygdx.kiddiecode.Block> baileyBlocks = MasterClass.blocks;
-
+        tickBlocks.clear();
         for (com.mygdx.kiddiecode.Block b : baileyBlocks) {
             switch (b.getType()) {
                 case ONLOAD_TRIGGER:
                     startBlock = expandBlock(b);
                     break;
                 case ONTICK_TRIGGER:
-                    tickBlock = expandBlock(b);
-
+                    tickBlocks.add(expandBlock(b));
                     break;
                 default: continue;
 
@@ -68,6 +68,10 @@ public class Interpreter {
                 break;
             }
             curBlock = curBlock.execute();
+        }
+        //start all the ticker scripts
+        for (com.mygdx.script.Blocks.Block b : tickBlocks) {
+            ((BlockOnTick)b).ticker.tickScript = b;
         }
     }
 
@@ -111,11 +115,16 @@ public class Interpreter {
                         innerNodes.get("[PosX]"),
                         innerNodes.get("[PosY]")
                 );
+                break;
             case MOVE_PLAYER_BY:
                 yB = new BlockApplyForceToPlayer(
                         innerNodes.get("[MoveX]"),
                         innerNodes.get("[MoveY]")
                 );
+                break;
+            case ONTICK_TRIGGER:
+                yB = new BlockOnTick(WorldGrid.playerEntity);
+                break;
         }
         //yB is yueyangBlock, bB is baileyBlock
         if (yB == null) {

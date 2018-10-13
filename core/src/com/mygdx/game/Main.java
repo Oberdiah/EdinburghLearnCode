@@ -36,6 +36,8 @@ public class Main extends ApplicationAdapter {
 
     public static Box2DDebugRenderer debugRenderer;
 
+    public static boolean codemode = false;
+
 	@Override
 	public void create () {
         renderer = new MainRenderer();
@@ -116,8 +118,8 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void render () {
 	    //toggle this to swap between the platformer sandbox and the scripting sandbox
-	    boolean CODEMODE = false;
-	    if (!CODEMODE) {
+
+	    if (!codemode) {
             Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

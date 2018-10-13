@@ -2,24 +2,31 @@ package com.mygdx.game.tile;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 
+import java.util.HashMap;
+
 public class Tile {
     public enum TileType {
-        ROCK("Rock"),
-        SKY("Sky");
+        ROCK("Rock", true),
+        SKY("Sky", false);
 
         String string;
+        boolean solid;
+        public static HashMap<String, TileType> names = new HashMap<>();
 
-        TileType(String s) {
+        TileType(String s, boolean solid) {
             string = s;
+            this.solid = solid;
+
         }
 
         public static TileType getTypeFromString(String s) {
+            return names.get(s);
+        }
+
+        static {
             for (TileType t : TileType.values()) {
-                if (t.string.equals(s)) {
-                    return t;
-                }
+                names.put(t.string, t);
             }
-            return null;
         }
     }
 

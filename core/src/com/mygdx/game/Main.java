@@ -7,20 +7,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
 import com.mygdx.game.rendering.MainRenderer;
 import com.mygdx.game.tick.Ticker;
 import com.mygdx.game.world.WorldGrid;
-import com.mygdx.kiddiecode.MasterClass;
 import com.mygdx.kiddiecode.*;
 
 import java.util.ArrayList;
@@ -39,7 +36,7 @@ public class Main extends ApplicationAdapter {
 
     public static HandleInput inputHandler;
 
-    public static boolean codemode = true;
+    public static boolean codemode = false;
 
     Skin touchpadSkin;
     Touchpad.TouchpadStyle touchpadStyle;

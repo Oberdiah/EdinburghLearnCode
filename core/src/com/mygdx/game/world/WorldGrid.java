@@ -55,7 +55,6 @@ public class WorldGrid {
             }
             else
             {
-                System.out.println(worldArray[x][y].collision);
                 PhysicsHandler.groundBody.destroyFixture(worldArray[x][y].collision);
             }
         }

@@ -7,7 +7,8 @@ import java.util.function.Consumer;
 abstract public class Block {
     private Block next;
     private Block tempNext;//for temporary shifts that will be undone if ever returned to this block
-    protected java.util.ArrayList<Consumer<Integer>> lazarusCommand;
+    protected boolean useTempNext = false;
+    /*protected java.util.ArrayList<Consumer<Integer>> lazarusCommand = new java.util.ArrayList<Consumer<Integer>>();
 
 
     private void lazarate() {
@@ -15,31 +16,32 @@ abstract public class Block {
             lazarus.accept(7);
         }
         lazarusCommand.clear();//removeAll(lazarusCommand);
-    }
+    }*/
 
     public Block execute(){
         functionality();
 
-        if (tempNext != null) {
+        if (useTempNext) {
             Block tR = tempNext;
             tempNext = null;
-            lazarate();
+            useTempNext = false;
+            //lazarate();
             return tR;
         }
         else if (next != null){
             //next.execute();
-            lazarate();
+            //lazarate();
             return next;
         }
         else if (Interpreter.nullJumpers.size() > 0) {
             Block newnext = Interpreter.nullJumpers.get(Interpreter.nullJumpers.size() - 1);
             Interpreter.nullJumpers.remove(Interpreter.nullJumpers.size() - 1);
             //newnext.execute();
-            lazarate();
+            //lazarate();
             return newnext;
         }
         else {
-            lazarate();
+            //lazarate();
             return null;
         }
     }

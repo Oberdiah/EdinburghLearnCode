@@ -170,7 +170,8 @@ public class IHateGestureListeners implements GestureListener {
 
     @Override
     public boolean zoom(float originalDistance, float currentDistance){
-        Main.cam.zoom *= currentDistance/originalDistance;
+
+        Main.cam.zoom += (originalDistance- currentDistance) * Gdx.graphics.getDeltaTime() ;
         return false;
     }
 

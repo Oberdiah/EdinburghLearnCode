@@ -1,0 +1,51 @@
+Each script is broken down into 'Blocks'.  So code like:
+
+IF x < 5 THEN place block at 0,0 ELSE place block at 1,1
+
+would become, in block form:
+                    ON LOAD
+                      |
+        ----------IF [x < 5]---------
+       |                             |
+ [PLACE dirt BLOCK at 0,0] [PLACE dirt BLOCK AT 1,1]
+
+ Each block has 3 properties: incoming nodes, outgoing nodes, and inner nodes.
+
+ Incoming nodes are the 'previous line of code'.  So IF [x < 5] has 1 incoming node, "ON LOAD"
+
+ Outgoing nodes are the 'next line of code', which may be complicated if you have a control statement.  "ON LOAD" has 1
+ outgoing node, "IF [x < 5]", but IF [x < 5] has 2, 1 for if the statement is true and 1 for when it is false.
+
+ Inner nodes are the actual raw values that you are using. So If [x < 5] has 2 inner nodes, 'x' and '5'.
+ "PLACE dirt BLOCK at 0,0" has 3: dirt, 0, and 0.
+
+ That is all there is to it.  You can access them using the following:
+ block.getIncomingNodes() //returns an ArrayList<Node>
+ block.getOutgoingNodes() //returns an ArrayList<Node>
+ block.getInnerNodes()    //returns a LinkedHashMap<String,String>.  An example of this would be:
+                                IF [PLACE dirt BLOCK at 0,0] has inner nodes { "[BlockName]":"dirt","[PosX]":"0","[PosY]":"0" }
+
+ If you want to add your own blocks, in Block.java there are two places to look:
+ public void drawTheFrigginText() and public Block()
+ And also add it to the enum in BlockTypes.java
+ Just add the stuff in there that you need.  [PLACE ___ BLOCK at _,_] is implemented like this:
+
+ public Block():
+ /* code above ...*/
+ else if (type == BlockTypes.PLACE_BLOCK) {
+       incomingNodes.addAll(makeNodes(1,true));//incoming: prev line
+       outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
+       innerNodes.put("[BlockName]","Dirt");
+       innerNodes.put("[PosX]","0");
+       innerNodes.put("[PosY]","0");
+  }
+  /* code below ...*/
+
+  public void drawTheFrigginText():
+  /* code above ...*/
+  else if (type == BlockTypes.PLACE_BLOCK) {
+       str = "Place Block [BlockName] at ([PosX],[PosY])";
+  }
+  /* code below ...*/
+
+  And "PLACE_BLOCK" must be added to the enum list in BlockTypes

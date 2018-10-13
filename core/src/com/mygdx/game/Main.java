@@ -4,9 +4,16 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
@@ -33,6 +40,14 @@ public class Main extends ApplicationAdapter {
     public static HandleInput inputHandler;
 
     public static boolean codemode = true;
+
+    Skin touchpadSkin;
+    Touchpad.TouchpadStyle touchpadStyle;
+    Drawable touchpadBackground;
+    Drawable touchKnob;
+    Touchpad touchpad;
+    Stage stage;
+
 
 	@Override
 	public void create () {
@@ -65,7 +80,30 @@ public class Main extends ApplicationAdapter {
         MasterClass.blocks.add(new Block(750,350,BlockTypes.MOVE_PLAYER_BY));
 
         Main.cam.zoom = HandleInput.CODE_ZOOM;//do this if we start in the code section
+
+
+
+        touchpadSkin = new Skin();
+        touchpadSkin.add("touchBackground", new Texture("bigcircle.png"));
+        touchpadSkin.add("touchKnob", new Texture("smallcircle.png"));
+
+        touchpadStyle = new Touchpad.TouchpadStyle();
+
+        touchpadBackground = touchpadSkin.getDrawable("touchBackground");
+        touchKnob = touchpadSkin.getDrawable("touchKnob");
+
+        touchpadStyle.background = touchpadBackground;
+        touchpadStyle.knob = touchKnob;
+
+        touchpad = new Touchpad(0, touchpadStyle);
+        touchpad.setBounds(0, 0, 150, 150);
+
+        stage = new Stage();
+        stage.addActor(touchpad);
+        Gdx.input.setInputProcessor(stage);
+
     }
+
 
 	@Override
 	public void render () {
@@ -76,9 +114,13 @@ public class Main extends ApplicationAdapter {
             Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             PhysicsHandler.render();
-
             renderer.render();
             tick.tick();
+
+            //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+            stage.act();
+            stage.draw();
         }
         else {
             Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -107,6 +149,14 @@ public class Main extends ApplicationAdapter {
             }
             MasterClass.batch.end();
         }
+
+        //Gdx.gl.glClearColor(1, 1, 1, 1);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+
+
+
 	}
 
     @Override

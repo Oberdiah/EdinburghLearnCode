@@ -82,7 +82,7 @@ public class Main extends ApplicationAdapter {
         touchpadSkin = new Skin();
         touchpadSkin.add("touchBackground", new Texture("bigcircle.png"));
         touchpadSkin.add("touchKnob", new Texture("smallcircle.png"));
-        touchpadSkin.add("pressed", new Texture("skyblock.png"));
+        touchpadSkin.add("pressed", new Texture("smallcircleshadow.png"));
 
         touchpadStyle = new Touchpad.TouchpadStyle();
         touchpadStyle2 = new Touchpad.TouchpadStyle();
@@ -119,7 +119,11 @@ public class Main extends ApplicationAdapter {
         Block.font = MasterClass.fontyWonty;
         MasterClass.blocks = new java.util.ArrayList<Block>();
         MasterClass.blocks.add(new Block(50, 200, BlockTypes.ONLOAD_TRIGGER));
+
         MasterClass.blocks.add(new Block(150, 350, BlockTypes.IF_LESS_THAN));
+        MasterClass.blocks.get(0).getOutgoingNodes().get(0).connectTo(
+                MasterClass.blocks.get(1).getIncomingNodes().get(0)
+        );
         MasterClass.blocks.add(new Block(250, 200, BlockTypes.LOOP_FROM_TO));
         MasterClass.blocks.add(new Block(350, 350, BlockTypes.LOOP_FROM_TO));
         MasterClass.blocks.add(new Block(450, 200, BlockTypes.PLACE_BLOCK));
@@ -224,6 +228,7 @@ public class Main extends ApplicationAdapter {
             shapeRenderer.setProjectionMatrix(Main.cam.combined);
             for (Block b : new ArrayList<>(MasterClass.blocks)) {
                 b.draw();
+                System.out.println(b);
             }
             //Circle TEMP = getAllNodes().get(0).boundCircle();
             //shapeRenderer.setColor(0,0,1,1);

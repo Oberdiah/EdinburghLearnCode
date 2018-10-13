@@ -91,6 +91,12 @@ public class HandleInput {
             if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 cam.translate(0, 3, 0);
             }
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+//                boolean flag = Saver.save();
+//                if (flag){
+//                    Gdx.input.getTextInput(Main.codeblockSearcher, "Save error!", "", "");
+//                }
+            }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             Main.codemode = !Main.codemode;

@@ -10,7 +10,6 @@ public class Instruction {
     public Boolean evaluate(){
         System.out.println(type.toString());
         return true;
-        //TODO: connect it with actual game
     }
 
 

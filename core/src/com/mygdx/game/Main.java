@@ -4,9 +4,14 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
 import com.mygdx.game.rendering.MainRenderer;
@@ -32,6 +37,19 @@ public class Main extends ApplicationAdapter {
     public static HandleInput inputHandler;
 
     public static boolean codemode = true;
+
+    Touchpad touchPad;
+    Touchpad.TouchpadStyle style;
+    TextureRegionDrawable background;
+    TextureRegionDrawable knobRegion;
+    Texture texture;
+    Texture killer;
+    SpriteBatch batch;
+    Stage stage;
+    public static int speed = 3;
+    int x = 0;
+    int y = 0;
+
 
 	@Override
 	public void create () {
@@ -62,6 +80,28 @@ public class Main extends ApplicationAdapter {
         MasterClass.blocks.add(new Block(300,350,BlockTypes.PLACE_PLAYER));
         MasterClass.blocks.add(new Block(350,200,BlockTypes.ONTICK_TRIGGER));
         MasterClass.blocks.add(new Block(400,350,BlockTypes.MOVE_PLAYER_BY));
+
+
+        //onscreen joystick
+        stage = new Stage();
+        texture = new Texture("skyblock.png");
+        killer = new Texture("rockblock.png");
+        background = new TextureRegionDrawable(new TextureRegion(texture, 0, 0,128,128));
+        knobRegion = new TextureRegionDrawable(new TextureRegion(texture,128,0,128,128));
+        style = new Touchpad.TouchpadStyle(background, knobRegion);
+        touchPad = new Touchpad(15, style);
+        touchPad.setBounds(0, 0, 150, 150);
+        batch = new SpriteBatch();
+        stage.addActor(touchPad);
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    public void update(){
+        if(touchPad.isTouched()){
+            x += touchPad.getKnobPercentX()*speed;
+            y += touchPad.getKnobPercentY()*speed;
+
+        }
     }
 
 	@Override
@@ -76,6 +116,12 @@ public class Main extends ApplicationAdapter {
 
             renderer.render();
             tick.tick();
+            update();
+            batch.begin();
+            batch.draw(killer, x,y, 70,70);
+            batch.end();
+            stage.act();
+            stage.draw();
         }
         else {
             Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -101,6 +147,14 @@ public class Main extends ApplicationAdapter {
             }
             MasterClass.batch.end();
         }
+
+        //Gdx.gl.glClearColor(1, 1, 1, 1);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+
+
+
 	}
 
     @Override

@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
@@ -65,6 +64,10 @@ public class Main extends ApplicationAdapter {
 
     public static float p1deltaX = 0;
     public static float p1deltaY = 0;
+
+
+    public static float p2deltaX = 0;
+    public static float p2deltaY = 0;
 
 
     @Override
@@ -138,9 +141,13 @@ public class Main extends ApplicationAdapter {
             Main.cam.zoom = 1;
         }
 
+        gesture = new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this));
+
     }
 
 
+
+    public IREALLYDespiseGestureDetectors gesture;
 
 	@Override
 	public void render () {
@@ -202,11 +209,16 @@ public class Main extends ApplicationAdapter {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     // This is run when anything is changed on this actor.
+
                     float deltaX = ((Touchpad) actor).getKnobPercentX();
                     float deltaY = ((Touchpad) actor).getKnobPercentY();
 
                     //Stick2Hold = true;
                     //System.out.println(deltaX+" "+deltaY);
+
+                    p2deltaX = ((Touchpad) actor).getKnobPercentX();
+                    p2deltaY = ((Touchpad) actor).getKnobPercentY();
+
 
                 }
             });
@@ -222,6 +234,9 @@ public class Main extends ApplicationAdapter {
         }else{
 
             Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
+            
+            Gdx.input.setInputProcessor(gesture);
+
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -244,7 +259,8 @@ public class Main extends ApplicationAdapter {
             MasterClass.batch.begin();
             MasterClass.batch.setProjectionMatrix(Main.cam.combined);
 
-            for (Block b : MasterClass.blocks) {
+
+            for (Block b : new ArrayList<Block>(MasterClass.blocks)) {
                 b.drawText();
             }
             MasterClass.batch.end();

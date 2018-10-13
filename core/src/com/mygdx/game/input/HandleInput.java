@@ -8,9 +8,13 @@ import com.mygdx.script.TestScript.Interpreter;
 
 public class HandleInput {
 
+    private float gameZoom = 1;
+    private float codeZoom = 21.329294f;
+
     public void handleInput(OrthographicCamera cam) {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             cam.zoom *= 1.02;
+            //System.out.println(cam.zoom);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
             cam.zoom *= 0.98;
@@ -35,6 +39,8 @@ public class HandleInput {
 //        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             Main.codemode = !Main.codemode;
+            if (Main.codemode == true) {Main.cam.zoom = codeZoom;}
+            else {Main.cam.zoom = gameZoom;}
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             Interpreter.initializeInterpreter();

@@ -1,5 +1,7 @@
 package com.mygdx.script.Blocks;
 
+import com.mygdx.script.TestScript.Interpreter;
+
 public class BlockIfLessThan extends Block {
 
     private String possiblyLower;
@@ -14,7 +16,7 @@ public class BlockIfLessThan extends Block {
 
     @Override
     protected void functionality() {
-        if (Integer.parseInt(possiblyLower) < Integer.parseInt(possiblyHigher)) { }
+        if (Interpreter.resolveVariable(possiblyLower) < Interpreter.resolveVariable(possiblyHigher)) { }
         else {
             setNext(ifFalse);
         }

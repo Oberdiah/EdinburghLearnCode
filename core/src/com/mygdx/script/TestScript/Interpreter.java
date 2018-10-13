@@ -8,6 +8,7 @@ import com.mygdx.script.Blocks.*;
 public class Interpreter {
     //This is the class that reads the script code and interacts with the world
     public static com.mygdx.script.Blocks.Block startBlock = null;
+    public static com.mygdx.script.Blocks.Block tickBlock = null;
 
     public static int resolveVariable(String potential) {
         try {
@@ -28,18 +29,24 @@ public class Interpreter {
                 case ONLOAD_TRIGGER:
                     startBlock = expandBlock(b);
                     break;
+                case ONTICK_TRIGGER:
+                    tickBlock = expandBlock(b);
+
+                    break;
                 default: continue;
             }
         }
     }
 
     public static void interpret() {
+        //run the onload stuffs
         com.mygdx.script.Blocks.Block curBlock = startBlock;
         while (true) {
             if (curBlock == null) {break;}
             curBlock = curBlock.execute();
         }
     }
+
 
     public static java.util.LinkedHashMap<String,String> variables = new java.util.LinkedHashMap<String, String>();
 

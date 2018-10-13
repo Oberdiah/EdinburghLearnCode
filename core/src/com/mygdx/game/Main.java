@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
@@ -119,6 +121,15 @@ public class Main extends ApplicationAdapter {
             tick.tick();
 
             //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            touchpad.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    // This is run when anything is changed on this actor.
+                    float deltaX = ((Touchpad) actor).getKnobPercentX();
+                    float deltaY = ((Touchpad) actor).getKnobPercentY();
+                    System.out.println(deltaX+" "+deltaY);
+                }
+            });
             Gdx.input.setInputProcessor(stage);
             SpriteBatch batch = new SpriteBatch();
             touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
@@ -165,6 +176,8 @@ public class Main extends ApplicationAdapter {
 
 
 	}
+
+
 
     @Override
     public void resize(int width, int height) {

@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
 import com.mygdx.game.rendering.MainRenderer;
@@ -122,7 +123,6 @@ public class Main extends ApplicationAdapter {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setProjectionMatrix(Main.cam.combined);
-
             for (Block b: MasterClass.blocks) {
                 b.draw();
             }
@@ -131,11 +131,15 @@ public class Main extends ApplicationAdapter {
             //shapeRenderer.circle(TEMP.x,TEMP.y,TEMP.radius);
             if (MasterClass.getStartTerminalNode() != null && MasterClass.getStartTerminalNode().isHighlighted()) {
                 //draw line from startTerminalNode.pos to drag.pos
-                shapeRenderer.rectLine(MasterClass.getStartTerminalNode().getPosX(),Block.progCoord(MasterClass.getStartTerminalNode().getPosY()), MasterClass.getDragX(),Block.progCoord(MasterClass.getDragY()),5);
+                Vector3 dummy = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
+                dummy = Main.cam.unproject(dummy);
+                MasterClass.setDrag(dummy.x,dummy.y);
+                shapeRenderer.rectLine(MasterClass.getStartTerminalNode().getPosX(),Block.progCoord(MasterClass.getStartTerminalNode().getPosY()), dummy.x,(dummy.y) ,5);//, MasterClass.getDragX(),Block.progCoord(MasterClass.getDragY()),5);
             }
             shapeRenderer.end();
             MasterClass.batch.begin();
             MasterClass.batch.setProjectionMatrix(Main.cam.combined);
+
             for (Block b: MasterClass.blocks) {
                 b.drawText();
             }

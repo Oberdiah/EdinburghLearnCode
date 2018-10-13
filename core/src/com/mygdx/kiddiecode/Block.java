@@ -59,7 +59,7 @@ public class Block {
             innerNodesEditBoundingBoxes.put(k,
                     new com.badlogic.gdx.math.Rectangle(
                             (int)(posX + counter + 2),
-                            (int)progCoord(progCoord((posY+50-height-20))),
+                            (int)(((posY+50-height-20))),
                             (int)MasterClass.layout.width,
                             (int)20
                     )

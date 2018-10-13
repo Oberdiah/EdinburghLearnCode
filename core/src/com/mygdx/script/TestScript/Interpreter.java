@@ -5,6 +5,7 @@ import com.mygdx.kiddiecode.MasterClass;
 import com.mygdx.script.Blocks.BlockForLoop;
 import com.mygdx.script.Blocks.BlockIfLessThan;
 import com.mygdx.script.Blocks.BlockOnLoad;
+import com.mygdx.script.Blocks.BlockPlaceBlock;
 
 
 public class Interpreter {
@@ -35,7 +36,11 @@ public class Interpreter {
     }
 
     public static void interpret() {
-        startBlock.execute();
+        com.mygdx.script.Blocks.Block curBlock = startBlock;
+        while (true) {
+            if (curBlock == null) {break;}
+            curBlock = curBlock.execute();
+        }
     }
 
     public static java.util.LinkedHashMap<String,String> variables = new java.util.LinkedHashMap<String, String>();
@@ -62,6 +67,12 @@ public class Interpreter {
                 yB = new BlockIfLessThan(innerNodes.get("[Val1]"),
                         innerNodes.get("[Val2]"),
                         expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                );
+                break;
+            case PLACE_BLOCK:
+                yB = new BlockPlaceBlock(innerNodes.get("[BlockName]"),
+                        innerNodes.get("[PosX]"),
+                        innerNodes.get("[PosY]")
                 );
                 break;
         }

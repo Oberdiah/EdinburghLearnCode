@@ -13,6 +13,7 @@ public class BlockForLoop extends Block {
         forVariableName = varName;
         lastVal = last;
         startVal = start;
+        cFN = conditionFailNext;
         //Interpreter.variables.put(varName,""+(start-1));
     }
 
@@ -27,7 +28,7 @@ public class BlockForLoop extends Block {
         if (Integer.parseInt(Interpreter.variables.get(forVariableName)) >= Integer.parseInt(lastVal)) {
             System.out.println("Leaving for loop.  " + forVariableName + " had value " + Interpreter.variables.get(forVariableName));
             Interpreter.variables.put(forVariableName,null);
-            setNext(cFN);
+            setTempNext(cFN);
         }
         else {
             Interpreter.nullJumpers.add(this);

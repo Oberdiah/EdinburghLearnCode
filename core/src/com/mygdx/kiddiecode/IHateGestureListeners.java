@@ -1,14 +1,12 @@
 package com.mygdx.kiddiecode;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
-
-import java.util.ArrayList;
 
 public class IHateGestureListeners implements GestureListener {
 
@@ -26,7 +24,7 @@ public class IHateGestureListeners implements GestureListener {
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
-        Vector3 woohoo = Main.cam.project(new Vector3(x,y,0));
+        Vector3 woohoo = Main.cam.unproject(new Vector3(x,y,0));
         startX = woohoo.x;
         startY = woohoo.y;
         java.util.ArrayList<Block> blocks = connecticut.getBlocks();
@@ -36,7 +34,7 @@ public class IHateGestureListeners implements GestureListener {
             MasterClass.setStartTerminalNode(null);
         }
         for (Node node : nodes) {
-            if ( (Intersector.overlaps(node.boundCircle(),pointToRect(startX,Block.progCoord(startY))) && !isCurrentlyDraggingSomething)) {
+            if ( (Intersector.overlaps(node.boundCircle(),pointToRect(startX,(startY))) && !isCurrentlyDraggingSomething)) {
 
                 System.out.println("Found node");
                 node.highlight();
@@ -49,7 +47,7 @@ public class IHateGestureListeners implements GestureListener {
         for (Block block : blocks) {
             java.util.Map<String,com.badlogic.gdx.math.Rectangle> bboxes = block.getInnerNodesEditBoundingBoxes();
             for (String editable : bboxes.keySet()) {
-                if ( (Intersector.overlaps(bboxes.get(editable),pointToRect(startX,startY)) && !isCurrentlyDraggingSomething)) {
+                if ( (Intersector.overlaps(bboxes.get(editable),pointToRect(startX,Block.progCoord(startY))) && !isCurrentlyDraggingSomething)) {
                     //clicked on the thingy!
                     System.out.println(editable + " clicked!");
                     MasterClass.listener.setBlock(block);
@@ -90,23 +88,26 @@ public class IHateGestureListeners implements GestureListener {
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
+        Vector3 woohoo = Main.cam.unproject(new Vector3(x,y,0));
+        x = woohoo.x;
+        y = woohoo.y;
         java.util.ArrayList<Block> transcontinentalRailroad = connecticut.getBlocks();
         java.util.ArrayList<Node> phillyCheeseSteak = connecticut.getAllNodes();
 
         Node node = MasterClass.getStartTerminalNode();
-        if ( node != null) {
+        /*if ( node != null) {
             if (!hasBeenPanning) {
-                MasterClass.setDrag(x,y);
+                //MasterClass.setDrag(x,y);
             }
-            MasterClass.addDrag(deltaX,deltaY);
-        }
+            //MasterClass.addDrag(deltaX,deltaY);
+        }*/
 
         //check if dragging over a node
         for (Node n : phillyCheeseSteak) {
             if (n.isHighlighted()) {continue;}
 
             //check if x+deltaX,y+deltaY is over it
-            if ( (Intersector.overlaps(n.boundCircle(),pointToRect(x+deltaX,Block.progCoord(y+deltaY))))) {
+            if ( (Intersector.overlaps(n.boundCircle(),pointToRect(MasterClass.getDragX(),(MasterClass.getDragY()))))) {
                 //we want to mark this node as 'hoverOver'
                 //but only if it would not create input-input or output-output connection
                 if (MasterClass.getStartTerminalNode() != null && n.isInputNode() != MasterClass.getStartTerminalNode().isInputNode()) {
@@ -124,7 +125,7 @@ public class IHateGestureListeners implements GestureListener {
 
         for (Block block : transcontinentalRailroad) {
 
-            if ((Intersector.overlaps(block.boundRect(),pointToRect(startX,startY)) && !isCurrentlyDraggingSomething)
+            if ((Intersector.overlaps(block.boundRect(),pointToRect(startX,block.progCoord(startY))) && !isCurrentlyDraggingSomething)
                     || block.isHighlighted()) {
 
                 block.highlight();

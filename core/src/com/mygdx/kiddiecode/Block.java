@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import java.awt.*;
 import java.util.regex.Pattern;
 
 public class Block {
@@ -17,8 +16,8 @@ public class Block {
     private boolean isHighlightedVar;
 
     static public ShapeRenderer shupooey;
-    static public SpriteBatch spadoogle;
-    static public BitmapFont biddangger;
+    static public SpriteBatch spriteBatch;
+    static public BitmapFont font;
 
     private java.util.ArrayList<Node> incomingNodes;
     private java.util.ArrayList<Node> outgoingNodes;
@@ -55,7 +54,7 @@ public class Block {
         for (String k : innerNodes.keySet()) {
             String toMatch = k.replace('[',' ').replace(']',' ') + "="+innerNodes.get(k);
             shupooey.setColor(0.8f, 0.8f, 0.8f, 1);
-            MasterClass.layout.setText(biddangger,toMatch);
+            MasterClass.layout.setText(font,toMatch);
             shupooey.rect(posX + counter + 5, progCoord(posY+50-height), MasterClass.layout.width, 20);
             innerNodesEditBoundingBoxes.put(k,
                     new com.badlogic.gdx.math.Rectangle(
@@ -67,10 +66,12 @@ public class Block {
             );
             counter += MasterClass.layout.width + 5;
         }
+
+        //drawText();
     }
 
-    public void drawTheFrigginText() {
-        spadoogle.setColor(0,0,0,1);
+    public void drawText() {
+        spriteBatch.setColor(0,0,0,1);
         String str = "yiggledoog";
         if (type == BlockTypes.ONLOAD_TRIGGER) {
             str = "OnLoad";
@@ -99,14 +100,14 @@ public class Block {
         for (String k : innerNodes.keySet()) {
             str = str.replaceAll(Pattern.quote(k),innerNodes.get(k));
         }
-        biddangger.draw(spadoogle,str,posX+2,progCoord(posY)+height-2);
+        font.draw(spriteBatch,str,posX+2,progCoord(posY)+height-2);
         //add edit button for each key thingy
         int counter = 0;
         for (String k : innerNodes.keySet()) {
-            spadoogle.setColor(0,0,0,1);
+            spriteBatch.setColor(0,0,0,1);
             String toMatch = k.replace('[',' ').replace(']',' ')+"="+innerNodes.get(k);
-            biddangger.draw(spadoogle,toMatch,posX + counter + 2, progCoord(posY+50-height)+18);
-            MasterClass.layout.setText(biddangger,toMatch);
+            font.draw(spriteBatch,toMatch,posX + counter + 2, progCoord(posY+50-height)+18);
+            MasterClass.layout.setText(font,toMatch);
             counter += MasterClass.layout.width + 5;
         }
     }

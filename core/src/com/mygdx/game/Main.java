@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
@@ -122,9 +121,13 @@ public class Main extends ApplicationAdapter {
             Main.cam.zoom = 1;
         }
 
+        gesture = new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this));
+
     }
 
 
+
+    public IREALLYDespiseGestureDetectors gesture;
 
 	@Override
 	public void render () {
@@ -171,7 +174,7 @@ public class Main extends ApplicationAdapter {
             //stage.act();
             //stage.draw();
         } else {
-            Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
+            Gdx.input.setInputProcessor(gesture);
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

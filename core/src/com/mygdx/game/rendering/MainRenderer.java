@@ -27,8 +27,6 @@ public class MainRenderer {
     }
 
     public void render() {
-        Main.inputHandler.handleInput(Main.cam);
-        Main.cam.update();
         batch.setProjectionMatrix(Main.cam.combined);
 
         batch.begin();

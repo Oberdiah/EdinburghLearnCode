@@ -90,9 +90,9 @@ public class IHateGestureListeners implements GestureListener {
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        Vector3 woohoo = Main.cam.unproject(new Vector3(x,y,0));
-        x = woohoo.x;
-        y = woohoo.y;
+        //Vector3 woohoo = Main.cam.unproject(new Vector3(x,y,0));
+        //x = woohoo.x;
+        //y = woohoo.y;
         java.util.ArrayList<Block> transcontinentalRailroad = connecticut.getBlocks();
         java.util.ArrayList<Node> phillyCheeseSteak = connecticut.getAllNodes();
 
@@ -109,7 +109,7 @@ public class IHateGestureListeners implements GestureListener {
             if (n.isHighlighted()) {continue;}
 
             //check if x+deltaX,y+deltaY is over it
-            if ( (Intersector.overlaps(n.boundCircle(),pointToRect(x+deltaX,(y+deltaY))))) {
+            if ( (Intersector.overlaps(n.boundCircle(),pointToRect(x+deltaX,Block.progCoord(y+deltaY))))) {
                 //we want to mark this node as 'hoverOver'
                 //but only if it would not create input-input or output-output connection
                 if (MasterClass.getStartTerminalNode() != null && n.isInputNode() != MasterClass.getStartTerminalNode().isInputNode()) {

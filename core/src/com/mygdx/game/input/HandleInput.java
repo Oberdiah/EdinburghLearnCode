@@ -13,11 +13,15 @@ public class HandleInput {
 
     public void handleInput(OrthographicCamera cam) {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            cam.zoom *= 1.02;
+            if (!Main.codemode) {
+                cam.zoom *= 1.02;
+            }
             //System.out.println(cam.zoom);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            cam.zoom *= 0.98;
+            if (!Main.codemode) {//code zooming is STUPID it sucks DON'T do it bro
+                cam.zoom *= 0.98;
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             cam.translate(-3, 0, 0);

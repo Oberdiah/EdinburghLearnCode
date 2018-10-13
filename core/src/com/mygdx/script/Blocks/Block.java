@@ -9,9 +9,9 @@ abstract public class Block {
         functionality();
 
         if (tempNext != null) {
-            System.out.println("SDJKBVASLJ");
+            Block tR = tempNext;
             tempNext = null;
-            return tempNext;
+            return tR;
         }
         else if (next != null){
             //next.execute();

@@ -12,6 +12,7 @@ public class IHateGestureListeners implements GestureListener {
 
     private Main connecticut;
     private static boolean isCurrentlyDraggingSomething;
+    private static boolean barneySaysDraggingIsANoNo = false;
     private float startX;
     private float startY;
 
@@ -104,6 +105,7 @@ public class IHateGestureListeners implements GestureListener {
 
         //check if dragging over a node
         for (Node n : phillyCheeseSteak) {
+            if (barneySaysDraggingIsANoNo) {break;}
             if (n.isHighlighted()) {continue;}
 
             //check if x+deltaX,y+deltaY is over it
@@ -124,25 +126,35 @@ public class IHateGestureListeners implements GestureListener {
         }
 
         for (Block block : transcontinentalRailroad) {
+            if (barneySaysDraggingIsANoNo) {break;}
             //System.out.println(block.boundRect().toString());
             //System.out.println(pointToRect(startX,block.progCoord(startY)));
             //System.out.println(x + " " + deltaX);
-            if ((Intersector.overlaps(block.boundRect(),pointToRect(x+deltaX,block.progCoord(y+deltaY))) && !isCurrentlyDraggingSomething)
+            Vector3 dummy = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
+            dummy = Main.cam.unproject(dummy);
+            if ((Intersector.overlaps(block.boundRect(),pointToRect(dummy.x,block.progCoord(dummy.y))) && !isCurrentlyDraggingSomething)
                     || block.isHighlighted()) {
 
                 block.highlight();
                 isCurrentlyDraggingSomething = true;
 
-                Vector3 dummy = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
-                dummy = Main.cam.unproject(dummy);
                 //System.out.println(dummy.toString());
                 //System.out.println(dummy.x + " " + dummy.y);
                 block.setPosX(dummy.x);//block.getPosX() + deltaX);
-                block.setPosY(block.progCoord(dummy.y));//block.getPosY() + deltaY);
+                block.setPosY(Block.progCoord(dummy.y));//block.getPosY() + deltaY);
 
                 break;
             }
         }
+        /*if (!isCurrentlyDraggingSomething) {
+            barneySaysDraggingIsANoNo = true;
+            //move the camera
+            //Vector2 dummy = new Vector2(deltaX,deltaY);
+            Vector3 dummy = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
+            dummy = Main.cam.unproject(dummy);
+            dummy = dummy.nor();
+            Main.cam.translate(-dummy.x,dummy.y);
+        }*/
         hasBeenPanning = true;
         return false;
     }
@@ -155,6 +167,7 @@ public class IHateGestureListeners implements GestureListener {
     }
 
     public void releaseDragData() {
+        barneySaysDraggingIsANoNo = false;
         java.util.ArrayList<Block> transcontinentalRailroad = connecticut.getBlocks();
         java.util.ArrayList<Node> phillyCheeseSteak = connecticut.getAllNodes();
 

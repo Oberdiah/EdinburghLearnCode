@@ -77,6 +77,20 @@ public class HandleInput {
 //        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
 //            cam.rotate(0.5f, 0, 0, 1);
 //        }
+        if (Main.codemode == true) {
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                cam.translate(-3, 0, 0);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                cam.translate(3, 0, 0);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                cam.translate(0, -3, 0);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                cam.translate(0, 3, 0);
+            }
+        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             Main.codemode = !Main.codemode;
             if (Main.codemode == true) {gameZoom = Main.cam.zoom;Main.cam.zoom = codeZoom;}

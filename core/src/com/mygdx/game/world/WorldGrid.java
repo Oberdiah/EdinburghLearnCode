@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class WorldGrid {
     private ArrayList<Entity> entityArrayList = new ArrayList<Entity>();
 
-    public static final int worldWidth = 500;
-    public static final int worldHeight = 100;
+    public static final int worldWidth = 100;
+    public static final int worldHeight = 50;
 
     public Tile.TileType[][] getWorldArray() {
         return worldArray;

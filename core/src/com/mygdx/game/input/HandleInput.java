@@ -8,10 +8,10 @@ public class HandleInput {
 
     public void handleInput(OrthographicCamera cam) {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            cam.zoom += 0.02;
+            cam.zoom *= 1.02;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            cam.zoom -= 0.02;
+            cam.zoom *= 0.98;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             cam.translate(-3, 0, 0);

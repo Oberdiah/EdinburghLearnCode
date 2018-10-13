@@ -11,11 +11,13 @@ import com.mygdx.game.tile.Tile;
 
 public class MainRenderer {
     SpriteBatch batch;
-    public static Texture img;
+    public static Texture rockblock;
+
+    public static final int BLOCKPIXELSIZE = 32;
 
     public void init() {
         batch = new SpriteBatch();
-        img = new Texture("player.png");
+        rockblock = new Texture("rockblock.png");
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         Main.cam = new OrthographicCamera(30, 30 * (h / w));
@@ -32,7 +34,7 @@ public class MainRenderer {
         batch.begin();
 
         renderWorld();
-        renderEntities();
+        //renderEntities();
 
         batch.end();
     }
@@ -50,7 +52,7 @@ public class MainRenderer {
             {
                 if (Main.worldGrid.getWorldArray()[xSqr][ySqr] == Tile.TileType.Rock)
                 {
-                    batch.draw(img, xSqr*16, ySqr*16);
+                    batch.draw(rockblock, xSqr*MainRenderer.BLOCKPIXELSIZE, ySqr*MainRenderer.BLOCKPIXELSIZE);
                 }
             }
         }
@@ -58,6 +60,6 @@ public class MainRenderer {
 
     public void dispose() {
         batch.dispose();
-        img.dispose();
+        rockblock.dispose();
     }
 }

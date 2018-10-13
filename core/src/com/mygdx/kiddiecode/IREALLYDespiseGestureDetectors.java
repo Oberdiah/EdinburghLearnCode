@@ -2,9 +2,9 @@ package com.mygdx.kiddiecode;
 
 import com.badlogic.gdx.input.GestureDetector;
 
-public class IDespiseGestureDetectors extends GestureDetector {
+public class IREALLYDespiseGestureDetectors extends GestureDetector {
     private IHateGestureListeners blahblahblah;
-    public IDespiseGestureDetectors(GestureListener listener) {
+    public IREALLYDespiseGestureDetectors(GestureListener listener) {
         super(listener);
         blahblahblah = (IHateGestureListeners) listener;
     }

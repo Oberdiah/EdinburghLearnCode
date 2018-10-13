@@ -7,20 +7,20 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
 import com.mygdx.game.physics.PhysicsHandler;
 import com.mygdx.game.rendering.MainRenderer;
 import com.mygdx.game.tick.Ticker;
 import com.mygdx.game.world.WorldGrid;
-import com.mygdx.kiddiecode.MasterClass;
 import com.mygdx.kiddiecode.*;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class Main extends ApplicationAdapter {
 
     public static HandleInput inputHandler;
 
-    public static boolean codemode = true;
+    public static boolean codemode = false;
 
     Skin touchpadSkin;
     Touchpad.TouchpadStyle touchpadStyle;
@@ -76,7 +76,7 @@ public class Main extends ApplicationAdapter {
         touchpad = new Touchpad(0, touchpadStyle);
         touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
 
-        stage = new Stage();
+        stage = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
         stage.addActor(touchpad);
 
 
@@ -123,8 +123,13 @@ public class Main extends ApplicationAdapter {
 
             //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             Gdx.input.setInputProcessor(stage);
-            stage.act();
-            stage.draw();
+            SpriteBatch batch = new SpriteBatch();
+            touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+            batch.begin();
+            touchpad.draw(batch, 0.5f);
+            batch.end();
+            //stage.act();
+            //stage.draw();
         }
         else {
             Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
@@ -174,7 +179,7 @@ public class Main extends ApplicationAdapter {
             cam.zoom = HandleInput.CODE_ZOOM;
         }
         cam.update();
-        stage.getViewport().update(width, height);
+        //stage.getViewport().update(width, height);
     }
 
 	@Override

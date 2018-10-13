@@ -41,6 +41,8 @@ public class Main extends ApplicationAdapter {
 
     public static boolean codemode = false;
 
+    public static TextInputHandlersAreNotLonely codeblockSearcher = new TextInputHandlersAreNotLonely();
+
     Skin touchpadSkin;
     Touchpad.TouchpadStyle touchpadStyle;
     Drawable touchpadBackground;

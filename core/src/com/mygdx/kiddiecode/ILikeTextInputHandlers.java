@@ -8,7 +8,7 @@ public class ILikeTextInputHandlers implements Input.TextInputListener {
 
     @Override
     public void input (String text) {
-        block.getInnerNodes().put(innerNodeKey,text);
+            block.getInnerNodes().put(innerNodeKey, text);
     }
 
     @Override

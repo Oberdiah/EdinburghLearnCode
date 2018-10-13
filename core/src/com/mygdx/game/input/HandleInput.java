@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
 import com.mygdx.game.tile.Tile;
+import com.mygdx.kiddiecode.MasterClass;
 import com.mygdx.script.TestScript.Interpreter;
 
 public class HandleInput {
@@ -99,6 +100,9 @@ public class HandleInput {
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             Interpreter.initializeInterpreter();
             Interpreter.interpret();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O) && Main.codemode == true) {
+            Gdx.input.getTextInput(Main.codeblockSearcher, "Find Block", "", "");
         }
 
     }

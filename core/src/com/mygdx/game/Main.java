@@ -51,8 +51,8 @@ public class Main extends ApplicationAdapter {
         MasterClass.fontyWonty = new BitmapFont();
         MasterClass.batch = new SpriteBatch();
         Block.shupooey = shapeRenderer;
-        Block.spadoogle = MasterClass.batch;
-        Block.biddangger = MasterClass.fontyWonty;
+        Block.spriteBatch = MasterClass.batch;
+        Block.font = MasterClass.fontyWonty;
         MasterClass.blocks = new java.util.ArrayList<Block>();
         MasterClass.blocks.add(new Block(50,200,BlockTypes.ONLOAD_TRIGGER));
         MasterClass.blocks.add(new Block(100,350,BlockTypes.IF_LESS_THAN));
@@ -81,6 +81,8 @@ public class Main extends ApplicationAdapter {
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setProjectionMatrix(Main.cam.combined);
+
             for (Block b: MasterClass.blocks) {
                 b.draw();
             }
@@ -93,8 +95,9 @@ public class Main extends ApplicationAdapter {
             }
             shapeRenderer.end();
             MasterClass.batch.begin();
+            MasterClass.batch.setProjectionMatrix(Main.cam.combined);
             for (Block b: MasterClass.blocks) {
-                b.drawTheFrigginText();
+                b.drawText();
             }
             MasterClass.batch.end();
         }

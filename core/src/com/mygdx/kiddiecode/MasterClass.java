@@ -54,8 +54,8 @@ public class MasterClass {//extends ApplicationAdapter {
         fontyWonty = new BitmapFont();
         batch = new SpriteBatch();
         Block.shupooey = shapeRenderer;
-        Block.spadoogle = batch;
-        Block.biddangger = fontyWonty;
+        Block.spriteBatch = batch;
+        Block.font = fontyWonty;
         blocks = new java.util.ArrayList<Block>();
         blocks.add(new Block(50,200,BlockTypes.ONLOAD_TRIGGER));
         blocks.add(new Block(100,350,BlockTypes.IF_LESS_THAN));
@@ -90,7 +90,7 @@ public class MasterClass {//extends ApplicationAdapter {
         shapeRenderer.end();
         batch.begin();
         for (Block b: blocks) {
-            b.drawTheFrigginText();
+            b.drawText();
         }
         batch.end();
     }

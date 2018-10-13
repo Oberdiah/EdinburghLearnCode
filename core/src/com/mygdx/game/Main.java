@@ -64,7 +64,7 @@ public class Main extends ApplicationAdapter {
         MasterClass.blocks.add(new Block(650,200,BlockTypes.ONTICK_TRIGGER));
         MasterClass.blocks.add(new Block(750,350,BlockTypes.MOVE_PLAYER_BY));
 
-        Main.cam.zoom = 21.329294f;//do this if we start in the code section
+        Main.cam.zoom = HandleInput.CODE_ZOOM;//do this if we start in the code section
     }
 
 	@Override
@@ -114,6 +114,9 @@ public class Main extends ApplicationAdapter {
         cam.viewportWidth = 30f;
         cam.viewportHeight = 30f * height/width;
         cam.update();
+        if (codemode) {
+            cam.zoom = HandleInput.CODE_ZOOM;
+        }
     }
 
 	@Override

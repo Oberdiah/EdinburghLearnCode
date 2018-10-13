@@ -13,8 +13,10 @@ public class HandleInput {
     boolean wasTouched0 = false;
     boolean wasTouched1 = false;
 
+    public static final float CODE_ZOOM = 21.329294f;
+
     private float gameZoom = 1;
-    private float codeZoom = 21.329294f;
+    private float codeZoom = CODE_ZOOM;
 
     public void handleInput(OrthographicCamera cam) {
 

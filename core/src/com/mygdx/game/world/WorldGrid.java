@@ -12,6 +12,8 @@ public class WorldGrid {
     public static final int worldWidth = 100;
     public static final int worldHeight = 50;
 
+    public static Entity playerEntity;
+
     public Tile[][] getWorldArray() {
         return worldArray;
     }
@@ -27,7 +29,10 @@ public class WorldGrid {
     }
 
     public void init() {
-        entityArrayList.add(new Entity());
+        Entity player = new Entity();
+        player.physicsObject = PhysicsHandler.createPhysicsEntity(5, 5, 1, 2, true);
+        entityArrayList.add(player);
+        playerEntity = player;
     }
 
     public void setBlock(int x, int y, Tile.TileType t) {

@@ -16,9 +16,14 @@ public class BlockIfLessThan extends Block {
 
     @Override
     protected void functionality() {
-        if (Interpreter.resolveVariable(possiblyLower) < Interpreter.resolveVariable(possiblyHigher)) { }
+        //System.out.println("iffy: " + possiblyLower + "( "+Interpreter.resolveVariable(possiblyLower)+" ) v "
+        //        + possiblyHigher + "( "+Interpreter.resolveVariable(possiblyHigher)+" )");
+        if (Interpreter.resolveVariable(possiblyLower) < Interpreter.resolveVariable(possiblyHigher)) {
+            System.out.println("Succeed");
+        }
         else {
-            setNext(ifFalse);
+            setTempNext(ifFalse);
+            useTempNext = true;
         }
     }
 }

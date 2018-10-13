@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
-import com.mygdx.game.rendering.MainRenderer;
 import com.mygdx.game.tile.Tile;
 import com.mygdx.script.TestScript.Interpreter;
 
@@ -30,8 +29,8 @@ public class HandleInput {
 
                     Vector3 vec = Main.cam.unproject(new Vector3(x, y,0));
 
-                    int blockPressedX = (int) (vec.x/ MainRenderer.BLOCKPIXELSIZE);
-                    int blockPressedY = (int) (vec.y/ MainRenderer.BLOCKPIXELSIZE);
+                    int blockPressedX = (int) (vec.x);
+                    int blockPressedY = (int) (vec.y);
 
                     Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.ROCK);
 
@@ -48,8 +47,8 @@ public class HandleInput {
 
                     Vector3 vec = Main.cam.unproject(new Vector3(x, y,0));
 
-                    int blockPressedX = (int) (vec.x/ MainRenderer.BLOCKPIXELSIZE);
-                    int blockPressedY = (int) (vec.y/ MainRenderer.BLOCKPIXELSIZE);
+                    int blockPressedX = (int) (vec.x);
+                    int blockPressedY = (int) (vec.y);
 
                     Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.SKY);
 
@@ -71,18 +70,6 @@ public class HandleInput {
             if (!Main.codemode) {//code zooming is STUPID it sucks DON'T do it bro
                 cam.zoom *= 0.98;
             }
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            cam.translate(-3, 0, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            cam.translate(3, 0, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            cam.translate(0, -3, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            cam.translate(0, 3, 0);
         }
 //        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 //            cam.rotate(-0.5f, 0, 0, 1);

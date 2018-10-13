@@ -108,8 +108,12 @@ public class Main extends ApplicationAdapter {
         MasterClass.blocks.add(new Block(650, 200, BlockTypes.ONTICK_TRIGGER));
         MasterClass.blocks.add(new Block(750, 350, BlockTypes.MOVE_PLAYER_BY));
 
-        Main.cam.zoom = HandleInput.CODE_ZOOM;//do this if we start in the code section
-
+        if (codemode) {
+            Main.cam.zoom = HandleInput.CODE_ZOOM;//do this if we start in the code section
+        }
+        else {
+            Main.cam.zoom = 1;
+        }
 
     }
 

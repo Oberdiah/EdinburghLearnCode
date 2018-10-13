@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
 
 import java.util.ArrayList;
@@ -25,8 +26,9 @@ public class IHateGestureListeners implements GestureListener {
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
-        startX = x;
-        startY = y;
+        Vector3 woohoo = Main.cam.project(new Vector3(x,y,0));
+        startX = woohoo.x;
+        startY = woohoo.y;
         java.util.ArrayList<Block> blocks = connecticut.getBlocks();
         java.util.ArrayList<Node> nodes = connecticut.getAllNodes();
         if (MasterClass.getStartTerminalNode() != null) {
@@ -170,7 +172,8 @@ public class IHateGestureListeners implements GestureListener {
 
     @Override
     public boolean zoom(float originalDistance, float currentDistance){
-        Main.cam.zoom *= currentDistance/originalDistance;
+
+        Main.cam.zoom += (originalDistance- currentDistance) * Gdx.graphics.getDeltaTime() ;
         return false;
     }
 

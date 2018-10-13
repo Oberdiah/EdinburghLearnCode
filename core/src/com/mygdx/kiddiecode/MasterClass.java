@@ -13,12 +13,12 @@ import com.badlogic.gdx.math.Circle;
 
 import java.util.ArrayList;
 
-public class MasterClass extends ApplicationAdapter {
+public class MasterClass {//extends ApplicationAdapter {
 
-    private BitmapFont fontyWonty;
-    private ShapeRenderer shapeRenderer;
-    private java.util.ArrayList<Block> blocks;
-    private SpriteBatch batch;
+    static public BitmapFont fontyWonty;
+    static public ShapeRenderer shapeRenderer;
+    static public java.util.ArrayList<Block> blocks;
+    static public SpriteBatch batch;
     public java.util.ArrayList<Block> getBlocks() {return blocks;}
     public java.util.ArrayList<Node> getAllNodes() {
         java.util.ArrayList<Node> toReturn = new java.util.ArrayList<Node>();
@@ -31,6 +31,8 @@ public class MasterClass extends ApplicationAdapter {
     private static Node startTerminalNode = null;//when dragging from node to node, this keeps track of what node dragging from
     private static float dragX = 0;//when dragging from node to node, this keeps track of position you're dragging to.
     private static float dragY = 0;
+    public static float getDragX() {return dragX;}
+    public static float getDragY() {return dragY;}
     private static Node theHoverOver = null;
 
     public static GlyphLayout layout = new GlyphLayout();
@@ -44,7 +46,7 @@ public class MasterClass extends ApplicationAdapter {
     public static Node getHoverOver() {return theHoverOver;}
 
 
-    @Override
+    /*@Override
     public void create() {
         Gdx.input.setInputProcessor(new IDespiseGestureDetectors(new IHateGestureListeners(this)));
 
@@ -64,13 +66,13 @@ public class MasterClass extends ApplicationAdapter {
         blocks.add(new Block(350,200,BlockTypes.ONTICK_TRIGGER));
         blocks.add(new Block(400,350,BlockTypes.MOVE_PLAYER_BY));
 
-    }
+    }*/
 
     private float progCoord(float x) {//returns programming coordinates instead of mathematical
         return Gdx.graphics.getHeight() - x;
     }
 
-    @Override
+    /*@Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -96,5 +98,5 @@ public class MasterClass extends ApplicationAdapter {
     @Override
     public void dispose() {
 
-    }
+    }*/
 }

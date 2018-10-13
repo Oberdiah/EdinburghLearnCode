@@ -5,16 +5,18 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.Main;
+
 import java.util.ArrayList;
 
 public class IHateGestureListeners implements GestureListener {
 
-    private MasterClass connecticut;
+    private Main connecticut;
     private static boolean isCurrentlyDraggingSomething;
     private float startX;
     private float startY;
 
-    public IHateGestureListeners(MasterClass mgd) {
+    public IHateGestureListeners(Main mgd) {
         connecticut = mgd;
         isCurrentlyDraggingSomething = false;
         hasBeenPanning = false;

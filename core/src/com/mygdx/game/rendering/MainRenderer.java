@@ -10,7 +10,7 @@ import com.mygdx.game.world.WorldGrid;
 import com.mygdx.game.tile.Tile;
 
 public class MainRenderer {
-    public static SpriteBatch batch;
+    SpriteBatch batch;
     public static Texture rockblock;
 
     public static final int BLOCKPIXELSIZE = 32;
@@ -32,7 +32,6 @@ public class MainRenderer {
         batch.begin();
 
         renderWorld();
-
         //renderEntities();
 
         batch.end();
@@ -49,7 +48,7 @@ public class MainRenderer {
         {
             for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++)
             {
-                if (Main.worldGrid.getWorldArray()[xSqr][ySqr].type == Tile.TileType.Rock)
+                if (Main.worldGrid.getWorldArray()[xSqr][ySqr] == Tile.TileType.Rock)
                 {
                     batch.draw(rockblock, xSqr*MainRenderer.BLOCKPIXELSIZE, ySqr*MainRenderer.BLOCKPIXELSIZE);
                 }

@@ -85,6 +85,7 @@ public class Main extends ApplicationAdapter {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setProjectionMatrix(Main.cam.combined);
+
             for (Block b: MasterClass.blocks) {
                 b.draw();
             }
@@ -101,7 +102,6 @@ public class Main extends ApplicationAdapter {
             shapeRenderer.end();
             MasterClass.batch.begin();
             MasterClass.batch.setProjectionMatrix(Main.cam.combined);
-
             for (Block b: MasterClass.blocks) {
                 b.drawText();
             }

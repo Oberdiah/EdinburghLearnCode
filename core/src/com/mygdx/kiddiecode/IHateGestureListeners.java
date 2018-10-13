@@ -1,12 +1,14 @@
 package com.mygdx.kiddiecode;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
+
+import java.util.ArrayList;
 
 public class IHateGestureListeners implements GestureListener {
 

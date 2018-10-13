@@ -3,62 +3,15 @@ package com.mygdx.game.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
-import com.mygdx.game.rendering.MainRenderer;
-import com.mygdx.game.tile.Tile;
 import com.mygdx.script.TestScript.Interpreter;
 
 public class HandleInput {
-    boolean wasTouched0 = false;
-    boolean wasTouched1 = false;
 
     private float gameZoom = 1;
     private float codeZoom = 21.329294f;
 
     public void handleInput(OrthographicCamera cam) {
-
-
-        // Yes, it's duplicated code, but it was fast to write. Deal with it.
-        {
-            if (Gdx.input.isButtonPressed(0)) {
-                if (!wasTouched0) {
-                    int x = Gdx.input.getX();
-                    int y = Gdx.input.getY();
-
-                    Vector3 vec = Main.cam.unproject(new Vector3(x, y,0));
-
-                    int blockPressedX = (int) (vec.x/ MainRenderer.BLOCKPIXELSIZE);
-                    int blockPressedY = (int) (vec.y/ MainRenderer.BLOCKPIXELSIZE);
-
-                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.Rock);
-
-                }
-                wasTouched0 = true;
-            } else {
-                wasTouched0 = false;
-            }
-
-            if (Gdx.input.isButtonPressed(1)) {
-                if (!wasTouched1) {
-                    int x = Gdx.input.getX();
-                    int y = Gdx.input.getY();
-
-                    Vector3 vec = Main.cam.unproject(new Vector3(x, y,0));
-
-                    int blockPressedX = (int) (vec.x/ MainRenderer.BLOCKPIXELSIZE);
-                    int blockPressedY = (int) (vec.y/ MainRenderer.BLOCKPIXELSIZE);
-
-                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.Sky);
-
-                }
-                wasTouched1 = true;
-            } else {
-                wasTouched1 = false;
-            }
-        }
-
-
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             if (!Main.codemode) {
                 cam.zoom *= 1.02;

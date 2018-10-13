@@ -1,7 +1,6 @@
 package com.mygdx.game.world;
 
 import com.mygdx.game.entites.Entity;
-import com.mygdx.game.physics.PhysicsHandler;
 import com.mygdx.game.tile.Tile;
 
 import java.util.ArrayList;
@@ -12,11 +11,11 @@ public class WorldGrid {
     public static final int worldWidth = 100;
     public static final int worldHeight = 50;
 
-    public Tile[][] getWorldArray() {
+    public Tile.TileType[][] getWorldArray() {
         return worldArray;
     }
 
-    private Tile[][] worldArray = new Tile[500][100];
+    private Tile.TileType[][] worldArray = new Tile.TileType[500][100];
 
     public ArrayList<Entity> getEntityArrayList() {
         return entityArrayList;
@@ -28,38 +27,17 @@ public class WorldGrid {
 
     public void init() {
         entityArrayList.add(new Entity());
-    }
 
-    public void setBlock(int x, int y, Tile.TileType t) {
-        if (x < 0 || y < 0 || x >=  WorldGrid.worldWidth || y >= WorldGrid.worldHeight)
-        {
-            return;
-        }
+        for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++) {
+            for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++) {
+                if (Math.random() < 0.5) {
+                    worldArray[xSqr][ySqr] = Tile.TileType.Rock;
+                }else{
+                    worldArray[xSqr][ySqr] = Tile.TileType.Sky;
 
-        if (worldArray[x][y] == null)
-        {
-            worldArray[x][y] = new Tile(t);
+                }
 
-            if (Tile.Blocks(t))
-            {
-                worldArray[x][y].collision = PhysicsHandler.createCollisionBlock(x, y);
-            }
-
-            return;
-        }
-
-        if (Tile.Blocks(t) != Tile.Blocks(worldArray[x][y].type)) {
-            if (Tile.Blocks(t))
-            {
-                worldArray[x][y].collision = PhysicsHandler.createCollisionBlock(x, y);
-            }
-            else
-            {
-                System.out.println(worldArray[x][y].collision);
-                PhysicsHandler.groundBody.destroyFixture(worldArray[x][y].collision);
             }
         }
-
-        worldArray[x][y].type = t;
     }
 }

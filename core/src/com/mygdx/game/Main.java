@@ -30,6 +30,7 @@ import com.mygdx.script.TestScript.Interpreter;
 
 import java.util.ArrayList;
 
+import static com.mygdx.kiddiecode.MasterClass.batch;
 import static com.mygdx.kiddiecode.MasterClass.shapeRenderer;
 
 public class Main extends ApplicationAdapter {
@@ -250,7 +251,6 @@ public class Main extends ApplicationAdapter {
                 }
             });
 
-
             goToCodeButton.addListener(new ClickListener() {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     Main.codemode = !Main.codemode;
@@ -263,6 +263,7 @@ public class Main extends ApplicationAdapter {
                     }
                 }
             });
+
 
             reloadCodeButton.addListener(new ClickListener() {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -285,8 +286,6 @@ public class Main extends ApplicationAdapter {
 
         } else {
 
-            Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
-
             Gdx.input.setInputProcessor(gesture);
 
             Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -297,6 +296,10 @@ public class Main extends ApplicationAdapter {
                 b.draw();
                 //System.out.println(b);
             }
+            SpriteBatch sb = new SpriteBatch();
+            sb.begin();
+            goToCodeButton.draw(sb,0.6f);
+
             //Circle TEMP = getAllNodes().get(0).boundCircle();
             //shapeRenderer.setColor(0,0,1,1);
             //shapeRenderer.circle(TEMP.x,TEMP.y,TEMP.radius);
@@ -310,6 +313,7 @@ public class Main extends ApplicationAdapter {
             shapeRenderer.end();
             MasterClass.batch.begin();
             MasterClass.batch.setProjectionMatrix(Main.cam.combined);
+
 
 
             for (Block b : new ArrayList<Block>(MasterClass.blocks)) {

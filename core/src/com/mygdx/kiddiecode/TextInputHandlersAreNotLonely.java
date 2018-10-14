@@ -15,7 +15,7 @@ public class TextInputHandlersAreNotLonely implements Input.TextInputListener {
     public void input (String text) {
         EnumSet.allOf(BlockTypes.class).forEach(
             blocktype -> {
-                System.out.println(blocktype.toString());
+                //System.out.println(blocktype.toString());
                 if (text.toUpperCase().equals( blocktype.s.toUpperCase() ) || text.toUpperCase().equals( blocktype.toString() )) {
                     found = blocktype;
                 }

@@ -29,7 +29,6 @@ import com.mygdx.script.TestScript.Interpreter;
 
 import java.util.ArrayList;
 
-import static com.mygdx.kiddiecode.MasterClass.batch;
 import static com.mygdx.kiddiecode.MasterClass.shapeRenderer;
 
 public class Main extends ApplicationAdapter {
@@ -203,6 +202,7 @@ public class Main extends ApplicationAdapter {
 
 
     public IREALLYDespiseGestureDetectors gesture;
+    public static long lastReset = 0L;
 
     @Override
     public void render() {
@@ -295,6 +295,12 @@ public class Main extends ApplicationAdapter {
 
             reloadCodeButton.addListener(new ClickListener() {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+
+                    if (Math.abs(lastReset-System.currentTimeMillis()) < 100) {
+                        return;
+                    }
+                    lastReset = System.currentTimeMillis();
 
                     Main.worldGrid.resetWorld();
                     Interpreter.initializeInterpreter();

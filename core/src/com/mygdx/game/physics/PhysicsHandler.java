@@ -29,8 +29,6 @@ public class PhysicsHandler {
         Fixture f = groundBody.createFixture(groundBox, 0.0f);
         groundBox.dispose();
 
-        System.out.println("Hello" + x);
-
         return f;
     }
 

@@ -56,6 +56,7 @@ public class Interpreter {
                     startBlock = expandBlock(b);
                     break;
                 case ONTICK_TRIGGER:
+                case ONTICK_CLASS_TRIGGER:
                     tickBlocks.add(expandBlock(b));
                     break;
                 default: continue;
@@ -79,7 +80,7 @@ public class Interpreter {
             //((BlockOnTick)b).ticker.tickScript = b;
         //}
         for (com.mygdx.script.Blocks.Block b : tickBlocks) {
-            if (((BlockOnTick)b).ticker.equals("Player1")) {
+            if (((BlockTicker)b).ticker.equals("Player1") || ((BlockTicker)b).ticker.equals("Player")) {
                 WorldGrid.playerEntity.tickScript.add(b);
             }
         }
@@ -166,6 +167,9 @@ public class Interpreter {
                 break;
             case ONTICK_TRIGGER:
                 yB = new BlockOnTick((innerNodes.get("[EntityName]")));
+                break;
+            case ONTICK_CLASS_TRIGGER:
+                yB = new BlockOnTickClass((innerNodes.get("[EntityClass]")));
                 break;
         }
         //yB is yueyangBlock, bB is baileyBlock
@@ -300,5 +304,16 @@ public class Interpreter {
             System.out.println("Warning - no such entity!");
             return null;
         }
+    }
+
+    public static ArrayList<Entity> getEntityFromClass(String s) {
+        ArrayList<Entity> toReturn = new ArrayList<>();
+        ArrayList<Entity> allEnts = Main.worldGrid.getEntityArrayList();
+        for (Entity e : allEnts) {
+            if (e.type.equals(s)) {
+                toReturn.add(e);
+            }
+        }
+        return toReturn;
     }
 }

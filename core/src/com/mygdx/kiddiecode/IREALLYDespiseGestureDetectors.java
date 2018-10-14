@@ -21,8 +21,22 @@ public class IREALLYDespiseGestureDetectors extends GestureDetector {
         //    MasterClass.setStartTerminalNode(null);
         //}
 
+        if (y <Gdx.graphics.getHeight()/10){
+            Main.cam.translate(0,10,0);
+        }
 
 
+        if (y >9*Gdx.graphics.getHeight()/10){
+            Main.cam.translate(0,-10,0);
+        }
+
+        if (x <Gdx.graphics.getWidth()/10){
+            Main.cam.translate(-10,0,0);
+        }
+
+        if (x >9*Gdx.graphics.getWidth()/10){
+            Main.cam.translate(10,0,0);
+        }
 
 
 
@@ -68,13 +82,8 @@ public class IREALLYDespiseGestureDetectors extends GestureDetector {
                         Gdx.input.getTextInput(Main.lh, "Load script", "", "");
                     }
                 }
-
-
             }
-
-
         }
-
 
         blahblahblah.releaseDragData();
         return true;

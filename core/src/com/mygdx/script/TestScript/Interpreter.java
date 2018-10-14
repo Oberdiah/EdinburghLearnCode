@@ -16,6 +16,8 @@ public class Interpreter {
     public static com.mygdx.script.Blocks.Block startBlock = null;
     public static java.util.ArrayList<com.mygdx.script.Blocks.Block> tickBlocks = new java.util.ArrayList<com.mygdx.script.Blocks.Block>();
 
+    public static Entity relevantEntity = null;//if in an ontrigger, what are we using?
+
     public static int resolveVariable(String potential) {
 
         switch (potential) {
@@ -103,25 +105,29 @@ public class Interpreter {
             case IF_LESS_THAN:
                 yB = new BlockIfLessThan(innerNodes.get("[Val1]"),
                         innerNodes.get("[Val2]"),
-                        expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                        expandBlock(bB.getOutgoingNodes().get(1).getLinked()),
+                        expandBlock(bB.getOutgoingNodes().get(2).getLinked())
                 );
                 break;
             case IF_GREATER_THAN:
                 yB = new BlockIfGreaterThan(innerNodes.get("[Val1]"),
                         innerNodes.get("[Val2]"),
-                        expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                        expandBlock(bB.getOutgoingNodes().get(1).getLinked()),
+                        expandBlock(bB.getOutgoingNodes().get(2).getLinked())
                 );
                 break;
             case IF_EQUAL_TO:
                 yB = new BlockIfEqualTo(innerNodes.get("[Val1]"),
                         innerNodes.get("[Val2]"),
-                        expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                        expandBlock(bB.getOutgoingNodes().get(1).getLinked()),
+                        expandBlock(bB.getOutgoingNodes().get(2).getLinked())
                 );
                 break;
             case IF_NOT_EQUAL_TO:
                 yB = new BlockIfNotEqualTo(innerNodes.get("[Val1]"),
                         innerNodes.get("[Val2]"),
-                        expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                        expandBlock(bB.getOutgoingNodes().get(1).getLinked()),
+                        expandBlock(bB.getOutgoingNodes().get(2).getLinked())
                 );
                 break;
             case PLACE_BLOCK:
@@ -148,6 +154,9 @@ public class Interpreter {
                         innerNodes.get("[PosX]"),
                         innerNodes.get("[PosY]")
                 );
+                break;
+            case MOVE_ENTITY:
+                yB = new BlockMoveEntity(innerNodes.get("[MoveX]"),innerNodes.get("[MoveY]"));
                 break;
             case ONTICK_TRIGGER:
                 yB = new BlockOnTick(getEntityFrom(innerNodes.get("[EntityName]")));

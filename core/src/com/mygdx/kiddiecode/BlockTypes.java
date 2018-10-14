@@ -9,5 +9,7 @@ public enum BlockTypes {
     PLACE_PLAYER,
     ONTICK_TRIGGER,
     MOVE_PLAYER_BY,
-
+    IF_EQUAL_TO,
+    IF_GREATER_THAN,
+    IF_NOT_EQUAL_TO
 }

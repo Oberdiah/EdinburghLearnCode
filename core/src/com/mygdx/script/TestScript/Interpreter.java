@@ -104,6 +104,24 @@ public class Interpreter {
                         expandBlock(bB.getOutgoingNodes().get(1).getLinked())
                 );
                 break;
+            case IF_GREATER_THAN:
+                yB = new BlockIfGreaterThan(innerNodes.get("[Val1]"),
+                        innerNodes.get("[Val2]"),
+                        expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                );
+                break;
+            case IF_EQUAL_TO:
+                yB = new BlockIfEqualTo(innerNodes.get("[Val1]"),
+                        innerNodes.get("[Val2]"),
+                        expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                );
+                break;
+            case IF_NOT_EQUAL_TO:
+                yB = new BlockIfNotEqualTo(innerNodes.get("[Val1]"),
+                        innerNodes.get("[Val2]"),
+                        expandBlock(bB.getOutgoingNodes().get(1).getLinked())
+                );
+                break;
             case PLACE_BLOCK:
                 yB = new BlockPlaceBlock(innerNodes.get("[BlockName]"),
                         innerNodes.get("[PosX]"),

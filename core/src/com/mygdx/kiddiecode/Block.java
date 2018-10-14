@@ -115,6 +115,9 @@ public class Block {
         else if (type == BlockTypes.ONTICK_TRIGGER) {
             str = "OnTick For Entity: [EntityName]";
         }
+        else if (type == BlockTypes.ONTICK_CLASS_TRIGGER) {
+            str = "OnTick For Entity Class: [EntityClass]";
+        }
         else if (type == BlockTypes.MOVE_PLAYER_BY) {
             str = "Move Player by ([MoveX],[MoveY])";
         }
@@ -198,6 +201,10 @@ public class Block {
         else if (type == BlockTypes.ONTICK_TRIGGER) {
             outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
             innerNodes.put("[EntityName]","Player1");
+        }
+        else if (type == BlockTypes.ONTICK_CLASS_TRIGGER) {
+            outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
+            innerNodes.put("[EntityClass]","Player");
         }
         else if (type == BlockTypes.MOVE_PLAYER_BY) {
             incomingNodes.addAll(makeNodes(1,true));//incoming: prev line

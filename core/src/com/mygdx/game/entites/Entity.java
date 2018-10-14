@@ -8,13 +8,16 @@ import com.mygdx.script.Blocks.Block;
 public class Entity {
     public Sprite sprite = new Sprite(MainRenderer.rockblock);
 
-    public Block tickScript;
+    public java.util.ArrayList<Block> tickScript = new java.util.ArrayList<Block>();
+    //public Block tickScript;
 
     public Body physicsObject;
 
     public String uniqueEntityName;
 
     public String type;
+
+    //public java.util.HashMap<String,String> exposedVariables = new java.util.HashMap<>();
 
     public Entity(String uID,String type) {
         uniqueEntityName = uID;

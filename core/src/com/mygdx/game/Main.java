@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -78,7 +77,11 @@ public class Main extends ApplicationAdapter {
 
     //buttons
     public static TextButton goToCodeButton;
-    static  TextButton reloadCodeButton;
+    public static  TextButton reloadCodeButton;
+    public static  TextButton addBlockButton;
+
+    public static  TextButton saveButton;
+    public static  TextButton loadButton;
 
     @Override
     public void create() {
@@ -89,6 +92,43 @@ public class Main extends ApplicationAdapter {
         Main.worldGrid.init();
         tick = new Ticker();
         inputHandler = new HandleInput();
+
+
+
+        Skin buttonSkin = new Skin();
+        buttonSkin.add("button", new Texture("bigcircle.png"));
+
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle(
+                buttonSkin.getDrawable("button"),buttonSkin.getDrawable("button"),buttonSkin.getDrawable("button"),
+                new BitmapFont()
+        );
+        stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+
+
+        goToCodeButton = new TextButton("CODE", textButtonStyle);
+        goToCodeButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(goToCodeButton);
+
+        reloadCodeButton = new TextButton("RELOAD", textButtonStyle);
+        reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(reloadCodeButton);
+
+
+        saveButton = new TextButton("SAVE", textButtonStyle);
+        saveButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(reloadCodeButton);
+
+        loadButton = new TextButton("LOAD", textButtonStyle);
+        loadButton.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(loadButton);
+
+        addBlockButton = new TextButton("ADD BLOCK", textButtonStyle);
+        addBlockButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(addBlockButton);
+
+
+
+
 
         //animeTick = 20;
 
@@ -119,26 +159,14 @@ public class Main extends ApplicationAdapter {
 
 
 
-        stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+
         stage.addActor(touchpad);
         stage.addActor(touchpad2);
 
 
-        Skin buttonSkin = new Skin();
-        buttonSkin.add("button", new Texture("bigcircle.png"));
 
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle(
-                buttonSkin.getDrawable("button"),buttonSkin.getDrawable("button"),buttonSkin.getDrawable("button"),
-                new BitmapFont()
-        );
 
-        goToCodeButton = new TextButton("CODE", textButtonStyle);
-        goToCodeButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
-        stage.addActor(goToCodeButton);
 
-        reloadCodeButton = new TextButton("RELOAD", textButtonStyle);
-        reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
-        stage.addActor(reloadCodeButton);
 
         //stage.addActor(goToCodeButton);
         //stage.addActor(reloadCodeButton);
@@ -272,8 +300,11 @@ public class Main extends ApplicationAdapter {
             reloadCodeButton.addListener(new ClickListener() {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
+                    Main.worldGrid.resetWorld();
                     Interpreter.initializeInterpreter();
                     Interpreter.interpret();
+
+
                 }
             });
 
@@ -305,7 +336,9 @@ public class Main extends ApplicationAdapter {
             SpriteBatch sb = new SpriteBatch();
             sb.begin();
             goToCodeButton.draw(sb,0.6f);
-
+            addBlockButton.draw(sb,0.6f);
+            loadButton.draw(sb,0.6f);
+            saveButton.draw(sb,0.6f);
             //Circle TEMP = getAllNodes().get(0).boundCircle();
             //shapeRenderer.setColor(0,0,1,1);
             //shapeRenderer.circle(TEMP.x,TEMP.y,TEMP.radius);

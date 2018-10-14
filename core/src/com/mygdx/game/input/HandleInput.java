@@ -54,7 +54,7 @@ public class HandleInput {
         }
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        /*if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             if (!Main.codemode) {
                 cam.zoom *= 1.02;
             }
@@ -64,7 +64,7 @@ public class HandleInput {
             if (!Main.codemode) {//code zooming is STUPID it sucks DON'T do it bro
                 cam.zoom *= 0.98;
             }
-        }
+        }*/
 //        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 //            cam.rotate(-0.5f, 0, 0, 1);
 //        }
@@ -99,6 +99,7 @@ public class HandleInput {
             else {codeZoom = Main.cam.zoom;Main.cam.zoom = gameZoom;}
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            Main.worldGrid.resetWorld();
             Interpreter.initializeInterpreter();
             Interpreter.interpret();
         }

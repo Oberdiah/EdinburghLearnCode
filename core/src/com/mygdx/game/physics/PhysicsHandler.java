@@ -3,13 +3,10 @@ package com.mygdx.game.physics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.Main;
-import com.mygdx.game.tile.Tile;
-import com.mygdx.game.world.WorldGrid;
 
 public class PhysicsHandler {
 
-    private static World world;
+    public static World world;
 
     private static Box2DDebugRenderer debugRenderer;
 
@@ -21,8 +18,8 @@ public class PhysicsHandler {
 
     public static void init() {
         Box2D.init();
-        world = new World(new Vector2(0, -10), true);
         debugRenderer = new Box2DDebugRenderer();
+        world = new World(new Vector2(0, -10), true);
         createFloor();
     }
 
@@ -31,6 +28,9 @@ public class PhysicsHandler {
         groundBox.setAsBox(0.5f, 0.5f, new Vector2(x+0.5f, y + 0.5f), 0.0f);
         Fixture f = groundBody.createFixture(groundBox, 0.0f);
         groundBox.dispose();
+
+        System.out.println("Hello" + x);
+
         return f;
     }
 
@@ -38,20 +38,6 @@ public class PhysicsHandler {
         BodyDef groundBodyDef = new BodyDef();
         groundBodyDef.position.set(new Vector2(0, 0));
         groundBody = world.createBody(groundBodyDef);
-
-        for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++) {
-            for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++) {
-                if (ySqr == 0) {
-                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.ROCK);
-                }
-                else
-                {
-                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.SKY);
-
-                }
-            }
-        }
-
     }
 
     public static void tick() {

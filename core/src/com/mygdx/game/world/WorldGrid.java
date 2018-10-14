@@ -33,8 +33,8 @@ public class WorldGrid {
         resetWorld();
     }
 
-    public void resetWorld() {
 
+    public void resetWorld() {
         for (Entity e : entityArrayList) {
             PhysicsHandler.world.destroyBody(e.physicsObject);
         }

@@ -16,7 +16,10 @@ public class BlockAssignVariable extends Block {
 
     @Override
     protected void functionality() {
-        Interpreter.variables.put(varName,""+Interpreter.resolveVariable(varVal));
+        //System.out.println(varVal);
+        String v = ""+Interpreter.resolveVariable(varVal);
+        Interpreter.variables.put(varName,v);
+        Interpreter.relevantEntity.giveVariable(varName,Integer.parseInt(v));
     }
 
 

@@ -20,7 +20,6 @@ public class Interpreter {
     public static Entity relevantEntity = null;//if in an ontrigger, what are we using?
 
     public static int resolveVariable(String potential) {
-
         switch (potential) {
             case "getW":
                 return boolToInt(GetW());
@@ -175,6 +174,9 @@ public class Interpreter {
                 break;
             case ONTICK_CLASS_TRIGGER:
                 yB = new BlockOnTickClass((innerNodes.get("[EntityClass]")));
+                break;
+            case VAR_DECLARE:
+                yB = new BlockAssignVariable(innerNodes.get("[Name]"),innerNodes.get("[Val]"));
                 break;
         }
         //yB is yueyangBlock, bB is baileyBlock

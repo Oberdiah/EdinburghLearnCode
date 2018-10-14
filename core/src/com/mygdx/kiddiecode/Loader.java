@@ -14,7 +14,8 @@ public class Loader {
         int pre = MasterClass.blocks.size();
         List<Block> alBlocks = new ArrayList<Block>();
         List<String> loadedBlocks = new ArrayList<String>();
-        String outString = Gdx.files.local(filename).readString("UTF-8");
+        String outString = Gdx.files.internal(filename).readString("UTF-8");
+        System.out.println(outString);
         loadedBlocks = Arrays.asList(outString.split("="));
         for (String s : loadedBlocks){
             System.out.println(s);

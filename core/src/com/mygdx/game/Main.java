@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.input.HandleInput;
@@ -45,6 +44,9 @@ public class Main extends ApplicationAdapter {
     public static boolean codemode = false;
 
     public static TextInputHandlersAreNotLonely codeblockSearcher = new TextInputHandlersAreNotLonely();
+    public static SaveHandler sh = new SaveHandler();
+    public static LoadHandler lh = new LoadHandler();
+
 
     Skin touchpadSkin;
     Touchpad.TouchpadStyle touchpadStyle;
@@ -121,18 +123,18 @@ public class Main extends ApplicationAdapter {
         Block.spriteBatch = MasterClass.batch;
         Block.font = MasterClass.fontyWonty;
         MasterClass.blocks = new java.util.ArrayList<Block>();
-        MasterClass.blocks.add(new Block(50, 200, BlockTypes.ONLOAD_TRIGGER));
-
-        MasterClass.blocks.add(new Block(150, 350, BlockTypes.IF_LESS_THAN));
-        MasterClass.blocks.get(0).getOutgoingNodes().get(0).connectTo(
-                MasterClass.blocks.get(1).getIncomingNodes().get(0)
-        );
-        MasterClass.blocks.add(new Block(250, 200, BlockTypes.LOOP_FROM_TO));
-        MasterClass.blocks.add(new Block(350, 350, BlockTypes.LOOP_FROM_TO));
-        MasterClass.blocks.add(new Block(450, 200, BlockTypes.PLACE_BLOCK));
-        MasterClass.blocks.add(new Block(550, 350, BlockTypes.PLACE_PLAYER));
-        MasterClass.blocks.add(new Block(650, 200, BlockTypes.ONTICK_TRIGGER));
-        MasterClass.blocks.add(new Block(750, 350, BlockTypes.MOVE_PLAYER_BY));
+//        MasterClass.blocks.add(new Block(50, 200, BlockTypes.ONLOAD_TRIGGER));
+//
+//        MasterClass.blocks.add(new Block(150, 350, BlockTypes.IF_LESS_THAN));
+//        MasterClass.blocks.get(0).getOutgoingNodes().get(0).connectTo(
+//                MasterClass.blocks.get(1).getIncomingNodes().get(0)
+//        );
+//        MasterClass.blocks.add(new Block(250, 200, BlockTypes.LOOP_FROM_TO));
+//        MasterClass.blocks.add(new Block(350, 350, BlockTypes.LOOP_FROM_TO));
+//        MasterClass.blocks.add(new Block(450, 200, BlockTypes.PLACE_BLOCK));
+//        MasterClass.blocks.add(new Block(550, 350, BlockTypes.PLACE_PLAYER));
+//        MasterClass.blocks.add(new Block(650, 200, BlockTypes.ONTICK_TRIGGER));
+//        MasterClass.blocks.add(new Block(750, 350, BlockTypes.MOVE_PLAYER_BY));
 
         if (codemode) {
             Main.cam.zoom = HandleInput.CODE_ZOOM;//do this if we start in the code section
@@ -234,7 +236,7 @@ public class Main extends ApplicationAdapter {
         }else{
 
             Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
-            
+
             Gdx.input.setInputProcessor(gesture);
 
             Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -243,7 +245,7 @@ public class Main extends ApplicationAdapter {
             shapeRenderer.setProjectionMatrix(Main.cam.combined);
             for (Block b : new ArrayList<>(MasterClass.blocks)) {
                 b.draw();
-                System.out.println(b);
+                //System.out.println(b);
             }
             //Circle TEMP = getAllNodes().get(0).boundCircle();
             //shapeRenderer.setColor(0,0,1,1);

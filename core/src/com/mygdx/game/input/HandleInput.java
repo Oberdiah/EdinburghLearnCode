@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
 import com.mygdx.game.tile.Tile;
-import com.mygdx.kiddiecode.MasterClass;
 import com.mygdx.script.TestScript.Interpreter;
 
 public class HandleInput {
@@ -91,11 +90,13 @@ public class HandleInput {
             if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 cam.translate(0, 3, 0);
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-//                boolean flag = Saver.save();
-//                if (flag){
-//                    Gdx.input.getTextInput(Main.codeblockSearcher, "Save error!", "", "");
-//                }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                Gdx.input.getTextInput(Main.sh, "Save as", "", "");
+                //Saver.save();
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+                Gdx.input.getTextInput(Main.lh, "Load script", "", "");
+                //Loader.load();
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {

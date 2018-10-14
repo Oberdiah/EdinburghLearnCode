@@ -1,0 +1,74 @@
+block(0) type(ONLOAD_TRIGGER) posX(50.0) posY(200.0)
+@
+outgoing_node(0) to_incoming_node(0) of_block(1)
+@
+=
+block(1) type(IF_LESS_THAN) posX(71.0) posY(322.0)
+@
+incoming_node(0) to_outgoing_node(0) of_block(0)
+@
+outgoing_node(0) to_incoming_node(0) of_block(2)
+@
+outgoing_node(1) to_incoming_node(0) of_block(3)
+@
+inner_node(0) var([Val1]) value(0)
+@
+inner_node(1) var([Val2]) value(0)
+@
+=
+block(2) type(LOOP_FROM_TO) posX(-47.0) posY(467.0)
+@
+incoming_node(0) to_outgoing_node(0) of_block(1)
+@
+outgoing_node(0) to_incoming_node(0) of_block(4)
+@
+inner_node(0) var([Var]) value(x)
+@
+inner_node(1) var([ValLower]) value(1)
+@
+inner_node(2) var([ValUpper]) value(100)
+@
+=
+block(3) type(LOOP_FROM_TO) posX(198.0) posY(461.0)
+@
+incoming_node(0) to_outgoing_node(1) of_block(1)
+@
+outgoing_node(0) to_incoming_node(0) of_block(5)
+@
+inner_node(0) var([Var]) value(x)
+@
+inner_node(1) var([ValLower]) value(1)
+@
+inner_node(2) var([ValUpper]) value(100)
+@
+=
+block(4) type(PLACE_BLOCK) posX(-51.0) posY(640.0)
+@
+incoming_node(0) to_outgoing_node(0) of_block(2)
+@
+inner_node(0) var([BlockName]) value(Dirt)
+@
+inner_node(1) var([PosX]) value(0)
+@
+inner_node(2) var([PosY]) value(0)
+@
+=
+block(5) type(PLACE_PLAYER) posX(269.0) posY(637.0)
+@
+incoming_node(0) to_outgoing_node(0) of_block(3)
+@
+inner_node(0) var([PosX]) value(0)
+@
+inner_node(1) var([PosY]) value(0)
+@
+=
+block(6) type(ONTICK_TRIGGER) posX(399.0) posY(340.0)
+@
+=
+block(7) type(MOVE_PLAYER_BY) posX(124.0) posY(811.0)
+@
+inner_node(0) var([MoveX]) value(0)
+@
+inner_node(1) var([MoveY]) value(0)
+@
+=

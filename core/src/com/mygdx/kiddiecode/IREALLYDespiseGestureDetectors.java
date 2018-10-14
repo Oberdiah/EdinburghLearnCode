@@ -21,21 +21,23 @@ public class IREALLYDespiseGestureDetectors extends GestureDetector {
         //    MasterClass.setStartTerminalNode(null);
         //}
 
+        float size = Main.cam.zoom;
+
         if (y <Gdx.graphics.getHeight()/10){
-            Main.cam.translate(0,10,0);
+            Main.cam.translate(0,size,0);
         }
 
 
         if (y >9*Gdx.graphics.getHeight()/10){
-            Main.cam.translate(0,-10,0);
+            Main.cam.translate(0,-size,0);
         }
 
         if (x <Gdx.graphics.getWidth()/10){
-            Main.cam.translate(-10,0,0);
+            Main.cam.translate(-size,0,0);
         }
 
         if (x >9*Gdx.graphics.getWidth()/10){
-            Main.cam.translate(10,0,0);
+            Main.cam.translate(size,0,0);
         }
 
 

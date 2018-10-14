@@ -77,7 +77,7 @@ public class Interpreter {
             if (curBlock == null) {
                 break;
             }
-            System.out.println(curBlock.getClass().toString());
+            //System.out.println(curBlock.getClass().toString());
             curBlock = curBlock.execute();
         }
         System.out.println("n");

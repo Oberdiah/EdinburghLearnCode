@@ -73,7 +73,10 @@ public class MainRenderer {
                 float width = 1;
                 float height = 1;
                 batch.draw(new TextureRegion(squareblock), position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
-
+            } else  {//default
+                float width = 1;
+                float height = 1;
+                batch.draw(new TextureRegion(squareblock), position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
             }
 
 

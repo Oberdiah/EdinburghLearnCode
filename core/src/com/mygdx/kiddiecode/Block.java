@@ -104,7 +104,7 @@ public class Block {
             str = "Loop [Var] From [ValLower] To [ValUpper]";
         }
         else if (type == BlockTypes.VAR_DECLARE) {
-            str = "Var [Name]";
+            str = "Var [Name] = [Val]";
         }
         else if (type == BlockTypes.PLACE_BLOCK) {
             str = "Place Block [BlockName] at ([PosX],[PosY])";
@@ -183,7 +183,8 @@ public class Block {
         else if (type == BlockTypes.VAR_DECLARE) {
             incomingNodes.addAll(makeNodes(1,true));//incoming: prev line
             outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
-            innerNodes.put("[Var]","x");
+            innerNodes.put("[Name]","x");
+            innerNodes.put("[Val]","0");
         }
         else if (type == BlockTypes.PLACE_PLAYER) {
             incomingNodes.addAll(makeNodes(1,true));//incoming: prev line

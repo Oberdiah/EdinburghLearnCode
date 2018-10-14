@@ -33,6 +33,8 @@ public class BlockSpawnEntity extends Block {
 
         } else if (entityType.equals("Square")) {
             e.physicsObject = PhysicsHandler.createPhysicsEntity(x, y, 1, 1, false);
+        } else { //by default
+            e.physicsObject = PhysicsHandler.createPhysicsEntity(x, y, 1, 1, false);
         }
 
         System.out.println("Spawned entity " + entityName + " of type " + entityType);

@@ -38,8 +38,10 @@ public class Interpreter {
                 return boolToInt(GetLeft());
             case "getRight":
                 return boolToInt(GetRight());
-            //case "getPosX":
-                //return relevantEntity.get(0)
+            case "getPosX":
+                return (int)relevantEntity.physicsObject.getPosition().x;
+            case "getPosY":
+                return (int)(relevantEntity.physicsObject.getPosition().y);
         }
         try {
             return Integer.parseInt(potential);

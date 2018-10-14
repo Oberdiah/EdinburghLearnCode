@@ -4,7 +4,7 @@ public enum BlockTypes {
     ONLOAD_TRIGGER("On Load"),
     IF_LESS_THAN("If Less Than"),
     LOOP_FROM_TO("For"),
-    VAR_DECLARE("Var"),//does not do anything
+    VAR_DECLARE("Var"),
     PLACE_BLOCK("Place Block"),
     PLACE_PLAYER("Place Player"),
     ONTICK_TRIGGER("On Tick"),

@@ -17,11 +17,18 @@ public class Entity {
 
     public String type;
 
-    //public java.util.HashMap<String,String> exposedVariables = new java.util.HashMap<>();
+    public java.util.HashMap<String,Integer> exposedVariables = new java.util.HashMap<>();
 
     public Entity(String uID,String type) {
         uniqueEntityName = uID;
         this.type = type;
+        if (type.equals("Floatie")) {
+            this.physicsObject.setGravityScale(0);
+        }
+    }
+
+    public void giveVariable(String varname,int startingValue) {
+        exposedVariables.put(varname,startingValue);
     }
 
 }

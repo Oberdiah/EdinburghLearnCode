@@ -20,16 +20,17 @@ public class BlockMoveEntity extends Block {
 
     @Override
     protected void functionality() {
-        if (Interpreter.relevantEntity.isEmpty()) {
+        if (Interpreter.relevantEntity == null) {//.isEmpty()) {
             System.out.println("Warning - need to specify an entity!");
             return;
         }
         int x = Interpreter.resolveVariable(fX);
         int y = Interpreter.resolveVariable(fY);
-        for (Entity e : Interpreter.relevantEntity) {
+        //for (Entity e : Interpreter.relevantEntity) {
+        Entity e = Interpreter.relevantEntity;
             Vector2 center = e.physicsObject.getWorldCenter();
             e.physicsObject.applyLinearImpulse(x, y, center.x, center.y, true);
-        }
+        //}
     }
 
 }

@@ -26,6 +26,7 @@ abstract public class Block {
                 return newnext;
             }
             else {
+                Interpreter.relevantEntity = null;
                 return null;
             }
         }
@@ -38,6 +39,7 @@ abstract public class Block {
             return newnext;
         }
         else {
+            Interpreter.relevantEntity = null;
             return null;
         }
     }

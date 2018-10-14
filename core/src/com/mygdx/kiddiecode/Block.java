@@ -163,7 +163,7 @@ public class Block {
         }
         else if (type == BlockTypes.IF_LESS_THAN || type == BlockTypes.IF_GREATER_THAN || type == BlockTypes.IF_EQUAL_TO || type == BlockTypes.IF_NOT_EQUAL_TO) {
             incomingNodes.addAll(makeNodes(1,true));//incoming: prev line,
-            outgoingNodes.addAll(makeNodes(2,false));//outgoing: next line when true, next line when false
+            outgoingNodes.addAll(makeNodes(3,false));//outgoing: next line when true, next line when false, line after all if
             innerNodes.put("[Val1]","0");
             innerNodes.put("[Val2]","0");
         }

@@ -7,11 +7,13 @@ public class BlockIfEqualTo extends Block {
     private String possiblyLower;
     private String possiblyHigher;
     private Block ifFalse;
+    private Block after;
 
-    public BlockIfEqualTo(String possiblyLower,String possiblyHigher,Block ifFalse) {
+    public BlockIfEqualTo(String possiblyLower,String possiblyHigher,Block ifFalse,Block after) {
         this.possiblyLower = possiblyLower;
         this.possiblyHigher = possiblyHigher;
         this.ifFalse = ifFalse;
+        this.after = after;
     }
 
     @Override
@@ -25,5 +27,6 @@ public class BlockIfEqualTo extends Block {
             setTempNext(ifFalse);
             useTempNext = true;
         }
+        Interpreter.nullJumpers.add(after);
     }
 }

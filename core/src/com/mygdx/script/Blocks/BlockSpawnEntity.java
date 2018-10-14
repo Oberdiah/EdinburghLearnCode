@@ -38,7 +38,7 @@ public class BlockSpawnEntity extends Block {
         //add tick script to new entities
         for (Block b : Interpreter.tickBlocks) {
             if (((BlockOnTick)b).ticker.equals(entityName)) {
-                e.tickScript = b;
+                e.tickScript.add(b);
             }
         }
     }

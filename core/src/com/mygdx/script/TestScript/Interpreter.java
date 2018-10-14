@@ -80,7 +80,7 @@ public class Interpreter {
         //}
         for (com.mygdx.script.Blocks.Block b : tickBlocks) {
             if (((BlockOnTick)b).ticker.equals("Player1")) {
-                WorldGrid.playerEntity.tickScript = b;
+                WorldGrid.playerEntity.tickScript.add(b);
             }
         }
     }

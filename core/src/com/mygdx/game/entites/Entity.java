@@ -8,7 +8,8 @@ import com.mygdx.script.Blocks.Block;
 public class Entity {
     public Sprite sprite = new Sprite(MainRenderer.rockblock);
 
-    public Block tickScript;
+    public java.util.ArrayList<Block> tickScript = new java.util.ArrayList<Block>();
+    //public Block tickScript;
 
     public Body physicsObject;
 

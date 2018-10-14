@@ -99,6 +99,7 @@ public class HandleInput {
             else {codeZoom = Main.cam.zoom;Main.cam.zoom = gameZoom;}
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            Main.worldGrid.resetWorld();
             Interpreter.initializeInterpreter();
             Interpreter.interpret();
         }

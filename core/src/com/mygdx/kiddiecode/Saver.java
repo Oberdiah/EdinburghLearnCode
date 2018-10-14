@@ -1,11 +1,8 @@
 package com.mygdx.kiddiecode;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import com.badlogic.gdx.Gdx;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +10,6 @@ public class Saver {
     public static boolean save(String filename){
         int blockIndex = 0;
         List<String> lines = new ArrayList<String>();
-        Path file = Paths.get(filename);
 
         for (Block b : MasterClass.blocks){
             //b.get
@@ -49,7 +45,12 @@ public class Saver {
 
         }
         try {
-            Files.write(file, lines, Charset.forName("UTF-8"));
+            String t = "";
+            for (String s : lines) {
+                t += s;
+            }
+
+            Gdx.files.local(filename).writeString(t, false, "UTF-8");
         }catch (Exception e){
 
         }

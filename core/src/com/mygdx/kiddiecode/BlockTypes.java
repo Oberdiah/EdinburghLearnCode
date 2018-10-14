@@ -11,7 +11,8 @@ public enum BlockTypes {
     MOVE_PLAYER_BY("Move Player"),
     IF_EQUAL_TO("If Equal To"),
     IF_GREATER_THAN("If Greater Than"),
-    IF_NOT_EQUAL_TO("If Not Equal To");
+    IF_NOT_EQUAL_TO("If Not Equal To"),
+    SPAWN_ENTITY_AT("Spawn Entity");
 
     String s;
 

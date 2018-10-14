@@ -1,33 +1,20 @@
 package com.mygdx.kiddiecode;
 
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import com.badlogic.gdx.Gdx;
 
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Loader {
     public static void load(String filename){
+        int pre = MasterClass.blocks.size();
         List<Block> alBlocks = new ArrayList<Block>();
         List<String> loadedBlocks = new ArrayList<String>();
-        String outString = "";
-        try {
-            Scanner in = new Scanner(new FileReader(filename));
-            StringBuilder sb = new StringBuilder();
-            while(in.hasNext()) {
-                sb.append(in.next());
-            }
-            in.close();
-            outString = sb.toString();
-        }catch (Exception e){
-
-        }
+        String outString = Gdx.files.local(filename).readString("UTF-8");
         loadedBlocks = Arrays.asList(outString.split("="));
         for (String s : loadedBlocks){
             System.out.println(s);
@@ -60,11 +47,12 @@ public class Loader {
         }
         List<String> nodeInfo = new ArrayList<String>();
         int bIndex = 0;
+
         for (String s : loadedBlocks){
             nodeInfo = Arrays.asList(s.split("@"));
             for (String n : nodeInfo){
                 int parBIndex, lIndex, rIndex = -1;
-                System.out.println(n);
+                //System.out.println(n);
                 Pattern ticn = Pattern.compile("(?<=to_incoming_node\\().*?(?=\\))");
                 Pattern togn = Pattern.compile("(?<=to_outgoing_node\\().*?(?=\\))");
                 Matcher m = ticn.matcher(n);
@@ -78,9 +66,9 @@ public class Loader {
                     m = parBlk.matcher(n);
                     m.find();
                     parBIndex = Integer.parseInt(m.group(0));
-                    System.out.println(lIndex+" "+rIndex+" "+parBIndex);
-                    MasterClass.blocks.get(bIndex).getOutgoingNodes().get(lIndex).connectTo(
-                            MasterClass.blocks.get(parBIndex).getIncomingNodes().get(rIndex)
+                    //System.out.println(lIndex+" "+rIndex+" "+parBIndex);
+                    MasterClass.blocks.get(pre+bIndex).getOutgoingNodes().get(lIndex).connectTo(
+                            MasterClass.blocks.get(pre+parBIndex).getIncomingNodes().get(rIndex)
                     );
                 }
                 m = togn.matcher(n);
@@ -94,9 +82,9 @@ public class Loader {
                     m = parBlk.matcher(n);
                     m.find();
                     parBIndex = Integer.parseInt(m.group(0));
-                    System.out.println(lIndex+" "+rIndex+" "+parBIndex+" "+bIndex);
-                    MasterClass.blocks.get(bIndex).getIncomingNodes().get(lIndex).connectTo(
-                            MasterClass.blocks.get(parBIndex).getOutgoingNodes().get(rIndex)
+                    //System.out.println(lIndex+" "+rIndex+" "+parBIndex+" "+bIndex);
+                    MasterClass.blocks.get(pre+bIndex).getIncomingNodes().get(lIndex).connectTo(
+                            MasterClass.blocks.get(pre+parBIndex).getOutgoingNodes().get(rIndex)
                     );
                 }
 
@@ -114,7 +102,7 @@ public class Loader {
                     m = innIndex.matcher(n);
                     m.find();
                     innIndx = Integer.parseInt(m.group(0));
-                    MasterClass.blocks.get(bIndex).setInnerNode(var, value);
+                    MasterClass.blocks.get(pre+bIndex).setInnerNode(var, value);
                 }
 
             }

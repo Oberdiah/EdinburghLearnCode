@@ -300,7 +300,7 @@ public class Main extends ApplicationAdapter {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
 
-                    if (Math.abs(lastReset-System.currentTimeMillis()) < 100) {
+                    if (Math.abs(lastReset-System.currentTimeMillis()) < 1000) {
                         return;
                     }
                     lastReset = System.currentTimeMillis();

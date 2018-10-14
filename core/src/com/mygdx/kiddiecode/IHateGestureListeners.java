@@ -130,8 +130,8 @@ public class IHateGestureListeners implements GestureListener {
                 block.highlight();
                 isCurrentlyDraggingSomething = true;
 
-                block.setPosX(block.getPosX() + deltaX);
-                block.setPosY(block.getPosY() + deltaY);
+                block.setPosX(block.getPosX() + deltaX/3);
+                block.setPosY(block.getPosY() + deltaY/3);
 
                 break;
             }

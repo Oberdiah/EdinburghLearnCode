@@ -16,8 +16,9 @@ public class BlockOnTickClass extends BlockTicker {
 
     @Override
     protected void functionality() {
-        Interpreter.relevantEntity = new java.util.ArrayList<Entity>();
-        Interpreter.relevantEntity.addAll( Interpreter.getEntityFromClass( ticker ));
+        //Interpreter.relevantEntity = new java.util.ArrayList<Entity>();
+        //Interpreter.relevantEntity.addAll( Interpreter.getEntityFromClass( ticker ));
+        //Interpreter.relevantEntity = Interpreter.getEntityFromClass(ticker);
 
     }//just a starting point, it does nothing on its own
 }

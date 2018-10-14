@@ -16,7 +16,8 @@ public class Interpreter {
     public static com.mygdx.script.Blocks.Block startBlock = null;
     public static java.util.ArrayList<com.mygdx.script.Blocks.Block> tickBlocks = new java.util.ArrayList<com.mygdx.script.Blocks.Block>();
 
-    public static java.util.ArrayList<Entity> relevantEntity = new java.util.ArrayList<Entity>();//if in an ontrigger, what are we using?
+    //public static java.util.ArrayList<Entity> relevantEntity = new java.util.ArrayList<Entity>();//if in an ontrigger, what are we using?
+    public static Entity relevantEntity = null;//if in an ontrigger, what are we using?
 
     public static int resolveVariable(String potential) {
 
@@ -37,8 +38,10 @@ public class Interpreter {
                 return boolToInt(GetLeft());
             case "getRight":
                 return boolToInt(GetRight());
-            //case "getPosX":
-                //return relevantEntity.get(0)
+            case "getPosX":
+                return (int)relevantEntity.physicsObject.getPosition().x;
+            case "getPosY":
+                return (int)(relevantEntity.physicsObject.getPosition().y);
         }
         try {
             return Integer.parseInt(potential);

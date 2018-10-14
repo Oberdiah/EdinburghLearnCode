@@ -112,10 +112,13 @@ public class Block {
             str = "Place Player at ([PosX],[PosY])";
         }
         else if (type == BlockTypes.ONTICK_TRIGGER) {
-            str = "OnTick";
+            str = "OnTick For Entity: [EntityName]";
         }
         else if (type == BlockTypes.MOVE_PLAYER_BY) {
             str = "Move Player by ([MoveX],[MoveY])";
+        }
+        else if (type == BlockTypes.SPAWN_ENTITY_AT) {
+            str = "Spawn Entity [EntityName] of Type [EntityType] at ([PosX],[PosY])";
         }
         for (String k : innerNodes.keySet()) {
             str = str.replaceAll(Pattern.quote(k),innerNodes.get(k));
@@ -188,12 +191,21 @@ public class Block {
         }
         else if (type == BlockTypes.ONTICK_TRIGGER) {
             outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
+            innerNodes.put("[EntityName]","Player1");
         }
         else if (type == BlockTypes.MOVE_PLAYER_BY) {
             incomingNodes.addAll(makeNodes(1,true));//incoming: prev line
             outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
             innerNodes.put("[MoveX]","0");
             innerNodes.put("[MoveY]","0");
+        }
+        else if (type == BlockTypes.SPAWN_ENTITY_AT) {
+            incomingNodes.addAll(makeNodes(1,true));//incoming: prev line
+            outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
+            innerNodes.put("[EntityName]","George");
+            innerNodes.put("[EntityType]","Player");
+            innerNodes.put("[PosX]","0");
+            innerNodes.put("[PosY]","0");
         }
         else {
             //throw Exception("The following blocktype is not fully defined: " + type.toString());

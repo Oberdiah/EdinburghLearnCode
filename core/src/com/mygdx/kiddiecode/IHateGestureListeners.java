@@ -128,8 +128,10 @@ public class IHateGestureListeners implements GestureListener {
                 block.highlight();
                 isCurrentlyDraggingSomething = true;
 
-                block.setPosX(block.getPosX() + deltaX/3.5f);
-                block.setPosY(block.getPosY() + deltaY/3.5f);
+                float divisor = Gdx.graphics.getWidth()/640.0f;
+                
+                block.setPosX(block.getPosX() + deltaX/divisor);
+                block.setPosY(block.getPosY() + deltaY/divisor);
 
                 break;
             }

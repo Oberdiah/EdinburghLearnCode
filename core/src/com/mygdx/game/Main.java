@@ -377,13 +377,13 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-        goToCodeButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
-        reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
-        touchpad.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
-        touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 5, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        //goToCodeButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        //reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        //touchpad.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        //touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 5, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
 
         cam.viewportWidth = 30f;
-        cam.viewportHeight = 30f * height / width;
+        cam.viewportHeight = 30f * (height / (float) width);
         if (codemode) {
             cam.zoom = HandleInput.CODE_ZOOM;
         }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Block {
@@ -26,6 +27,10 @@ public class Block {
     public java.util.Map<String,com.badlogic.gdx.math.Rectangle> getInnerNodesEditBoundingBoxes() {return innerNodesEditBoundingBoxes;}
 
     public BlockTypes getType() {return type;}
+
+    public void setInnerNode(String key, String value) {
+        this.innerNodes.put(key, value);
+    }
 
     public static float progCoord(float x) {//returns programming coordinates instead of mathematical
         return Gdx.graphics.getHeight() - x;

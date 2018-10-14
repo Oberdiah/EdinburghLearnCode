@@ -68,8 +68,7 @@ public class MainRenderer {
 
     public void create() {
         final int FRAME_COLS = 6, FRAME_ROWS = 3;
-        walkSheet = new Texture(Gdx.files.internal("player.png"));
-
+        walkSheet = new Texture("player.png");
         TextureRegion[][] tmp = TextureRegion.split(walkSheet,
                 walkSheet.getWidth() / FRAME_COLS,
                 walkSheet.getHeight() / FRAME_ROWS);

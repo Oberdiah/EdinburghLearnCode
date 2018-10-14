@@ -10,6 +10,10 @@ public class Node {
     private Node nodeConnectedTo;
     private boolean isInputNodeVar;
 
+    public Node getNodeConnectedTo() {
+        return nodeConnectedTo;
+    }
+
     public Block getLinked() {
         if (nodeConnectedTo == null) {return null;}
         return nodeConnectedTo.parentBlock;

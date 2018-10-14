@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Main;
 import com.mygdx.game.tile.Tile;
-import com.mygdx.kiddiecode.MasterClass;
+import com.mygdx.game.world.WorldGrid;
 import com.mygdx.script.TestScript.Interpreter;
 
 public class HandleInput {
@@ -21,43 +21,36 @@ public class HandleInput {
     public void handleInput(OrthographicCamera cam) {
 
 
-        // Yes, it's duplicated code, but it was fast to write. Deal with it.
-        {
-            if (Gdx.input.isButtonPressed(0)) {
-                if (!wasTouched0) {
-                    int x = Gdx.input.getX();
-                    int y = Gdx.input.getY();
+        if (Gdx.input.isButtonPressed(0)) {
+            if (!wasTouched0) {
+                int x = Gdx.input.getX();
+                int y = Gdx.input.getY();
 
-                    Vector3 vec = Main.cam.unproject(new Vector3(x, y,0));
+                Vector3 vec = Main.cam.unproject(new Vector3(x, y,0));
 
-                    int blockPressedX = (int) (vec.x);
-                    int blockPressedY = (int) (vec.y);
+                int blockPressedX = (int) (vec.x);
+                int blockPressedY = (int) (vec.y);
 
-                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.ROCK);
+                Tile.TileType type = WorldGrid.getBlockType(blockPressedX, blockPressedY);
 
+                if (type != null) {
+                    if (type == Tile.TileType.SKY)
+                    {
+                        Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.ROCK);
+
+                    }
+                    else
+                    {
+                        Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.SKY);
+
+                    }
                 }
-                wasTouched0 = true;
-            } else {
-                wasTouched0 = false;
+
+
             }
-
-            if (Gdx.input.isButtonPressed(1)) {
-                if (!wasTouched1) {
-                    int x = Gdx.input.getX();
-                    int y = Gdx.input.getY();
-
-                    Vector3 vec = Main.cam.unproject(new Vector3(x, y,0));
-
-                    int blockPressedX = (int) (vec.x);
-                    int blockPressedY = (int) (vec.y);
-
-                    Main.worldGrid.setBlock(blockPressedX, blockPressedY, Tile.TileType.SKY);
-
-                }
-                wasTouched1 = true;
-            } else {
-                wasTouched1 = false;
-            }
+            wasTouched0 = true;
+        } else {
+            wasTouched0 = false;
         }
 
 
@@ -91,11 +84,13 @@ public class HandleInput {
             if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 cam.translate(0, 3, 0);
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-//                boolean flag = Saver.save();
-//                if (flag){
-//                    Gdx.input.getTextInput(Main.codeblockSearcher, "Save error!", "", "");
-//                }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                Gdx.input.getTextInput(Main.sh, "Save as", "", "");
+                //Saver.save();
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+                Gdx.input.getTextInput(Main.lh, "Load script", "", "");
+                //Loader.load();
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {

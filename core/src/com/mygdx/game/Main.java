@@ -41,7 +41,7 @@ public class Main extends ApplicationAdapter {
 
     public static HandleInput inputHandler;
 
-    public static boolean codemode = false;
+    public static boolean codemode = true;
 
     public static TextInputHandlersAreNotLonely codeblockSearcher = new TextInputHandlersAreNotLonely();
     public static SaveHandler sh = new SaveHandler();

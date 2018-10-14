@@ -1,14 +1,11 @@
 package com.mygdx.kiddiecode;
 
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import com.badlogic.gdx.Gdx;
 
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,18 +13,7 @@ public class Loader {
     public static void load(String filename){
         List<Block> alBlocks = new ArrayList<Block>();
         List<String> loadedBlocks = new ArrayList<String>();
-        String outString = "";
-        try {
-            Scanner in = new Scanner(new FileReader(filename));
-            StringBuilder sb = new StringBuilder();
-            while(in.hasNext()) {
-                sb.append(in.next());
-            }
-            in.close();
-            outString = sb.toString();
-        }catch (Exception e){
-
-        }
+        String outString = Gdx.files.local(filename).readString("UTF-8");
         loadedBlocks = Arrays.asList(outString.split("="));
         for (String s : loadedBlocks){
             System.out.println(s);

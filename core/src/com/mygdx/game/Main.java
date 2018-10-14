@@ -284,7 +284,7 @@ public class Main extends ApplicationAdapter {
 
         } else {
 
-            Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
+            //Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
 
             Gdx.input.setInputProcessor(gesture);
 

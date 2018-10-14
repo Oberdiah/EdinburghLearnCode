@@ -2,6 +2,7 @@ package com.mygdx.script.Blocks;
 
 import com.mygdx.game.Main;
 import com.mygdx.game.entites.Entity;
+import com.mygdx.game.physics.PhysicsHandler;
 import com.mygdx.script.TestScript.Interpreter;
 
 public class BlockSpawnEntity extends Block {
@@ -27,7 +28,10 @@ public class BlockSpawnEntity extends Block {
         int x = Interpreter.resolveVariable(posX);
         int y = Interpreter.resolveVariable(posY);
 
-        e.physicsObject.setTransform(x,y,0);
+        e.physicsObject = PhysicsHandler.createPhysicsEntity(x, y, 1, 2, true);
+
+        System.out.println("Spawned entity " + entityName + " of type " + entityType);
+
         Main.worldGrid.getEntityArrayList().add(e);
     }
 }

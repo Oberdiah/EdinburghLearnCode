@@ -146,7 +146,8 @@ public class Interpreter {
                 yB = new BlockSpawnEntity(innerNodes.get("[EntityName]"),
                         innerNodes.get("[EntityType]"),
                         innerNodes.get("[PosX]"),
-                        innerNodes.get("[PosY]"));
+                        innerNodes.get("[PosY]")
+                );
                 break;
             case ONTICK_TRIGGER:
                 yB = new BlockOnTick(getEntityFrom(innerNodes.get("[EntityName]")));

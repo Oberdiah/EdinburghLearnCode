@@ -203,6 +203,7 @@ public class Block {
             incomingNodes.addAll(makeNodes(1,true));//incoming: prev line
             outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
             innerNodes.put("[EntityName]","George");
+            innerNodes.put("[EntityType]","Player");
             innerNodes.put("[PosX]","0");
             innerNodes.put("[PosY]","0");
         }

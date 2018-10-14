@@ -164,8 +164,9 @@ public class Main extends ApplicationAdapter {
             Gdx.input.setInputProcessor(stage);
             Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            PhysicsHandler.render();
             renderer.render();
+            PhysicsHandler.render();
+
             tick.tick();
 
 

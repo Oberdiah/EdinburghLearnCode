@@ -13,7 +13,8 @@ public enum BlockTypes {
     IF_GREATER_THAN("If Greater Than"),
     IF_NOT_EQUAL_TO("If Not Equal To"),
     SPAWN_ENTITY_AT("Spawn Entity"),
-    MOVE_ENTITY("Move Entity");
+    MOVE_ENTITY("Move Entity"),
+    ONTICK_CLASS_TRIGGER("On Tick Class");
 
     String s;
 

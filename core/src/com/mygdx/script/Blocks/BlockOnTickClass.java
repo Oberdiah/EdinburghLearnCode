@@ -1,15 +1,14 @@
 package com.mygdx.script.Blocks;
 
 import com.mygdx.game.entites.Entity;
-import com.mygdx.script.Blocks.Block;
 import com.mygdx.script.TestScript.Interpreter;
 
-public class BlockOnTick extends BlockTicker {
+public class BlockOnTickClass extends BlockTicker {
 
     //public Entity ticker;
+    //public String ticker;
 
-
-    public BlockOnTick(String e) {
+    public BlockOnTickClass(String e) {
         //ticker = e;
         super(e);
     }
@@ -17,7 +16,7 @@ public class BlockOnTick extends BlockTicker {
     @Override
     protected void functionality() {
         Interpreter.relevantEntity = new java.util.ArrayList<Entity>();
-        Interpreter.relevantEntity.add( Interpreter.getEntityFrom( ticker ));
+        Interpreter.relevantEntity.addAll( Interpreter.getEntityFromClass( ticker ));
 
     }//just a starting point, it does nothing on its own
 }

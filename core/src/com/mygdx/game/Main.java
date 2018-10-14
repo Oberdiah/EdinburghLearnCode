@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -24,6 +26,7 @@ import com.mygdx.game.rendering.MainRenderer;
 import com.mygdx.game.tick.Ticker;
 import com.mygdx.game.world.WorldGrid;
 import com.mygdx.kiddiecode.*;
+import com.mygdx.script.TestScript.Interpreter;
 
 import java.util.ArrayList;
 
@@ -72,6 +75,10 @@ public class Main extends ApplicationAdapter {
     public static float p2deltaY = 0;
 
 
+    //buttons
+    public static TextButton goToCodeButton;
+    static  TextButton reloadCodeButton;
+
     @Override
     public void create() {
         renderer = new MainRenderer();
@@ -104,14 +111,33 @@ public class Main extends ApplicationAdapter {
 
         touchpad = new Touchpad(0, touchpadStyle);
 
-        touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+        touchpad.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
         touchpad2 = new Touchpad(0, touchpadStyle2);
-        touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/5, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
+        touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 5, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+
+
+
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.addActor(touchpad);
         stage.addActor(touchpad2);
 
+
+        Skin buttonSkin = new Skin();
+        buttonSkin.add("button", new Texture("bigcircle.png"));
+
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle(
+                buttonSkin.getDrawable("button"),buttonSkin.getDrawable("button"),buttonSkin.getDrawable("button"),
+                new BitmapFont()
+        );
+
+        goToCodeButton = new TextButton("CODE", textButtonStyle);
+        goToCodeButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(goToCodeButton);
+
+        reloadCodeButton = new TextButton("RELOAD", textButtonStyle);
+        reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(reloadCodeButton);
 
         //KiddieCode stuff
         Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
@@ -138,8 +164,7 @@ public class Main extends ApplicationAdapter {
 
         if (codemode) {
             Main.cam.zoom = HandleInput.CODE_ZOOM;//do this if we start in the code section
-        }
-        else {
+        } else {
             Main.cam.zoom = 1;
         }
 
@@ -148,17 +173,16 @@ public class Main extends ApplicationAdapter {
     }
 
 
-
     public IREALLYDespiseGestureDetectors gesture;
 
-	@Override
-	public void render () {
-	    //toggle this to swap between the platformer sandbox and the scripting sandbox
+    @Override
+    public void render() {
+        //toggle this to swap between the platformer sandbox and the scripting sandbox
 
         Main.inputHandler.handleInput(Main.cam);
         Main.cam.update();
 
-	    if (!codemode) {
+        if (!codemode) {
 
 
             Gdx.input.setInputProcessor(stage);
@@ -219,22 +243,47 @@ public class Main extends ApplicationAdapter {
                     //Stick2Hold = true;
                     //System.out.println(deltaX+" "+deltaY);
 
-                    p2deltaX = ((Touchpad) actor).getKnobPercentX();
-                    p2deltaY = ((Touchpad) actor).getKnobPercentY();
+                    p2deltaX = deltaX;
+                    p2deltaY = deltaY;
 
 
                 }
             });
+
+
+            goToCodeButton.addListener(new ClickListener() {
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    Main.codemode = !Main.codemode;
+                    if (Main.codemode == true) {
+                        HandleInput.gameZoom = Main.cam.zoom;
+                        Main.cam.zoom = HandleInput.codeZoom;
+                    } else {
+                        HandleInput.codeZoom = Main.cam.zoom;
+                        Main.cam.zoom = HandleInput.gameZoom;
+                    }
+                }
+            });
+
+            reloadCodeButton.addListener(new ClickListener() {
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+                    Interpreter.initializeInterpreter();
+                    Interpreter.interpret();
+                }
+            });
+
             //Gdx.input.setInputProcessor(stage);
             SpriteBatch batch = new SpriteBatch();
             batch.begin();
             touchpad.draw(batch, 0.6f);
             touchpad2.draw(batch, 0.6f);
+            goToCodeButton.draw(batch,0.6f);
+            reloadCodeButton.draw(batch,0.6f);
             batch.end();
             //stage.act();
             //stage.draw();
 
-        }else{
+        } else {
 
             Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
 
@@ -278,9 +327,9 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-        touchpad.setBounds(0, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
-        touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/5, 0, Gdx.graphics.getWidth()/5, Gdx.graphics.getWidth()/5);
-        
+        touchpad.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 5, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+
         cam.viewportWidth = 30f;
         cam.viewportHeight = 30f * height / width;
         if (codemode) {

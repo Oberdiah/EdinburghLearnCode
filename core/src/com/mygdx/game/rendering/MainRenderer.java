@@ -16,12 +16,12 @@ import com.mygdx.game.world.WorldGrid;
 public class MainRenderer {
     public static SpriteBatch batch;
     public static Texture rockblock;
-
-    public static final int BLOCKPIXELSIZE = 32;
+    public static Texture squareblock;
 
     public void init() {
         batch = new SpriteBatch();
         rockblock = new Texture("rockblock.png");
+        squareblock = new Texture("square.png");
         sky = new Texture("skyblock.png");
         sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         float w = Gdx.graphics.getWidth();
@@ -59,12 +59,24 @@ public class MainRenderer {
     private void renderEntities() {
         for (Entity e : Main.worldGrid.getEntityArrayList()) {
             // Get current frame of animation for the current stateTime
-            TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+
             Body physicsObj = e.physicsObject;
             Vector2 position = physicsObj.getPosition();
-            float width = 1;
-            float height = 2;
-            batch.draw(currentFrame, position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
+
+            if (e.type.equals("Player")) {
+                float width = 1;
+                float height = 2;
+                TextureRegion currentFrame;
+                currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+                batch.draw(currentFrame, position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
+            } else if (e.type.equals("Square")) {
+                float width = 1;
+                float height = 1;
+                batch.draw(new TextureRegion(squareblock), position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
+
+            }
+
+
         }
     }
 

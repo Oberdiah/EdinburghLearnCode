@@ -45,7 +45,7 @@ public class Interpreter {
         try {
             return Integer.parseInt(potential);
         } catch (Exception e) {//if it can't parse it, must be a variable name!
-            System.out.println(variables.toString());
+            //System.out.println(variables.toString());
             return Integer.parseInt(variables.get(potential));
         }
     }

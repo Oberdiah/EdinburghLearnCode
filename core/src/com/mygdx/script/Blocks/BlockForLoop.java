@@ -33,6 +33,7 @@ public class BlockForLoop extends Block {
             setTempNext(cFN);
         }
         else {
+            //System.out.println("Nulljumps");
             Interpreter.nullJumpers.add(this);
         }
     }

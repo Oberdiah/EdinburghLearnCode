@@ -21,6 +21,7 @@ abstract public class Block {
         else if (useTempNext && tempNext == null) {
             useTempNext = false;
             if (Interpreter.nullJumpers.size() > 0) {
+                //System.out.println("Nulljumping");
                 Block newnext = Interpreter.nullJumpers.get(Interpreter.nullJumpers.size() - 1);
                 Interpreter.nullJumpers.remove(Interpreter.nullJumpers.size() - 1);
                 return newnext;
@@ -35,6 +36,7 @@ abstract public class Block {
             return next;
         }
         else if (Interpreter.nullJumpers.size() > 0) {
+            //System.out.println("Nulljumping");
             Block newnext = Interpreter.nullJumpers.get(Interpreter.nullJumpers.size() - 1);
             Interpreter.nullJumpers.remove(Interpreter.nullJumpers.size() - 1);
             return newnext;

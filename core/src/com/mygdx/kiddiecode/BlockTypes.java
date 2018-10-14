@@ -12,7 +12,8 @@ public enum BlockTypes {
     IF_EQUAL_TO("If Equal To"),
     IF_GREATER_THAN("If Greater Than"),
     IF_NOT_EQUAL_TO("If Not Equal To"),
-    SPAWN_ENTITY_AT("Spawn Entity");
+    SPAWN_ENTITY_AT("Spawn Entity"),
+    MOVE_ENTITY("Move Entity");
 
     String s;
 

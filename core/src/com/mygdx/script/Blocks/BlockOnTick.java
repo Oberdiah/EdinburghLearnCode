@@ -2,6 +2,7 @@ package com.mygdx.script.Blocks;
 
 import com.mygdx.game.entites.Entity;
 import com.mygdx.script.Blocks.Block;
+import com.mygdx.script.TestScript.Interpreter;
 
 public class BlockOnTick extends Block {
 
@@ -12,5 +13,7 @@ public class BlockOnTick extends Block {
     }
 
     @Override
-    protected void functionality() { }//just a starting point, it does nothing on its own
+    protected void functionality() {
+        Interpreter.relevantEntity = ticker;
+    }//just a starting point, it does nothing on its own
 }

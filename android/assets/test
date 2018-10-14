@@ -1,0 +1,1 @@
+block(0) type(ONLOAD_TRIGGER) posX(-138.0) posY(393.74982)@outgoing_node(0) to_incoming_node(0) of_block(1)@=block(1) type(SPAWN_ENTITY_AT) posX(-136.0) posY(508.74982)@incoming_node(0) to_outgoing_node(0) of_block(0)@inner_node(0) var([EntityName]) value(George)@inner_node(1) var([EntityType]) value(Player)@inner_node(2) var([PosX]) value(0)@inner_node(3) var([PosY]) value(10)@=

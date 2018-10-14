@@ -12,8 +12,13 @@ public class Entity {
 
     public Body physicsObject;
 
-    public Entity() {
+    public String uniqueEntityName;
 
+    public String type;
+
+    public Entity(String uID,String type) {
+        uniqueEntityName = uID;
+        this.type = type;
     }
 
 }

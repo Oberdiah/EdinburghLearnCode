@@ -1,4 +1,4 @@
-package com.mygdx.script.TestScript;
+package com.mygdx.script.Blocks;
 
 import com.mygdx.game.entites.Entity;
 import com.mygdx.script.Blocks.Block;

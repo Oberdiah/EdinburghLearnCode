@@ -3,10 +3,12 @@ package com.mygdx.script.TestScript;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.Main;
+import com.mygdx.game.entites.Entity;
 import com.mygdx.game.world.WorldGrid;
-import com.mygdx.kiddiecode.BlockTypes;
 import com.mygdx.kiddiecode.MasterClass;
 import com.mygdx.script.Blocks.*;
+
+import java.util.ArrayList;
 
 
 public class Interpreter {
@@ -141,7 +143,7 @@ public class Interpreter {
                 );
                 break;
             case ONTICK_TRIGGER:
-                yB = new BlockOnTick(WorldGrid.playerEntity);
+                yB = new BlockOnTick(getEntityFrom(innerNodes.get("[EntityName]")));
                 break;
         }
         //yB is yueyangBlock, bB is baileyBlock
@@ -260,5 +262,21 @@ public class Interpreter {
 
     private static int boolToInt(Boolean b) {
         return (b ? 1 : 0);
+    }
+
+    public static Entity getEntityFrom(String s) {
+        if (s == "Player1") {
+            return WorldGrid.playerEntity;
+        }
+        else {
+            ArrayList<Entity> allEnts = Main.worldGrid.getEntityArrayList();
+            for (Entity e : allEnts) {
+                if (e.uniqueEntityName.equals(s)) {
+                    return e;
+                }
+            }
+            System.out.println("Warning - no such entity!");
+            return null;
+        }
     }
 }

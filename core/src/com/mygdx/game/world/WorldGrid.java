@@ -30,7 +30,7 @@ public class WorldGrid {
     }
 
     public void init() {
-        Entity player = new Entity();
+        Entity player = new Entity("Player1");
         player.physicsObject = PhysicsHandler.createPhysicsEntity(5, 5, 1, 2, true);
         entityArrayList.add(player);
         playerEntity = player;

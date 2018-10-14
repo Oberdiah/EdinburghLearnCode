@@ -155,6 +155,9 @@ public class Interpreter {
                         innerNodes.get("[PosY]")
                 );
                 break;
+            case MOVE_ENTITY:
+                yB = new BlockMoveEntity(innerNodes.get("[MoveX]"),innerNodes.get("[MoveY]"));
+                break;
             case ONTICK_TRIGGER:
                 yB = new BlockOnTick(getEntityFrom(innerNodes.get("[EntityName]")));
                 break;

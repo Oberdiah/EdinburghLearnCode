@@ -1,5 +1,6 @@
 package com.mygdx.game.world;
 
+import com.mygdx.game.Main;
 import com.mygdx.game.entites.Entity;
 import com.mygdx.game.physics.PhysicsHandler;
 import com.mygdx.game.tile.Tile;
@@ -33,6 +34,14 @@ public class WorldGrid {
         player.physicsObject = PhysicsHandler.createPhysicsEntity(5, 5, 1, 2, true);
         entityArrayList.add(player);
         playerEntity = player;
+    }
+
+    public static Tile.TileType getBlockType(int x, int y) {
+        if (x < 0 || y < 0 || x >=  WorldGrid.worldWidth || y >= WorldGrid.worldHeight)
+        {
+            return null;
+        }
+        return Main.worldGrid.getWorldArray()[x][y].type;
     }
 
     public void setBlock(int x, int y, Tile.TileType t) {

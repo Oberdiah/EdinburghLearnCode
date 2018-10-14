@@ -22,6 +22,8 @@ public class MainRenderer {
     public void init() {
         batch = new SpriteBatch();
         rockblock = new Texture("rockblock.png");
+        sky = new Texture("skyblock.png");
+        sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         Main.cam = new OrthographicCamera(30, 30 * (h / w));
@@ -84,7 +86,10 @@ public class MainRenderer {
         stateTime = 0f;
     }
 
+    private Texture sky;
     private void renderWorld() {
+        batch.draw(sky, -5000, -5000, 1, 1, 10000, 10000);
+
         for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++)
         {
             for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++)

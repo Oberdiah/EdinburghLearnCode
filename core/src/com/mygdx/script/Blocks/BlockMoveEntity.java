@@ -29,7 +29,7 @@ public class BlockMoveEntity extends Block {
         //for (Entity e : Interpreter.relevantEntity) {
         Entity e = Interpreter.relevantEntity;
             Vector2 center = e.physicsObject.getWorldCenter();
-            e.physicsObject.applyLinearImpulse(x, y, center.x, center.y, true);
+            e.physicsObject.applyLinearImpulse(x/10f, y/10f, center.x, center.y, true);
         //}
     }
 

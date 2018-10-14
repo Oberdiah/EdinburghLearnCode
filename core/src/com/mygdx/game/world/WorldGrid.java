@@ -39,6 +39,7 @@ public class WorldGrid {
             PhysicsHandler.world.destroyBody(e.physicsObject);
         }
 
+
         entityArrayList.clear();
 
         Entity player = new Entity("Player1","Player");

@@ -72,12 +72,15 @@ public class Interpreter {
     public static void interpret() {
         //run the onload stuffs
         com.mygdx.script.Blocks.Block curBlock = startBlock;
+        System.out.println("y");
         while (true) {
             if (curBlock == null) {
                 break;
             }
+            System.out.println(curBlock.getClass().toString());
             curBlock = curBlock.execute();
         }
+        System.out.println("n");
         //start all the ticker scripts
         //System.out.println(tickBlocks.size());
         //for (com.mygdx.script.Blocks.Block b : tickBlocks) {

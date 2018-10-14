@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 public class Block {
     private float posX;
     private float posY;
+    private float minwidth;
     private float width;
     private float height;
     private BlockTypes type;
@@ -133,6 +134,7 @@ public class Block {
             MasterClass.layout.setText(font,toMatch);
             counter += MasterClass.layout.width + 5;
         }
+        width = counter > minwidth ? counter + 5 : minwidth;
     }
 
     private java.util.ArrayList<Node> makeNodes(int amount,boolean isIncoming) {
@@ -147,6 +149,7 @@ public class Block {
         posX = x;
         posY = y;
         type = t;
+        minwidth = 150;
         width = 150;
         height = 70;
         isHighlightedVar = false;

@@ -37,6 +37,8 @@ public class Interpreter {
                 return boolToInt(GetLeft());
             case "getRight":
                 return boolToInt(GetRight());
+            //case "getPosX":
+                //return relevantEntity.get(0)
         }
         try {
             return Integer.parseInt(potential);

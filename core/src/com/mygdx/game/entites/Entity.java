@@ -17,6 +17,8 @@ public class Entity {
 
     public String type;
 
+    //public java.util.HashMap<String,String> exposedVariables = new java.util.HashMap<>();
+
     public Entity(String uID,String type) {
         uniqueEntityName = uID;
         this.type = type;

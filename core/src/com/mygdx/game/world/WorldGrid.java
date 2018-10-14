@@ -30,10 +30,34 @@ public class WorldGrid {
     }
 
     public void init() {
+        resetWorld();
+    }
+
+    public void resetWorld() {
+
+        for (Entity e : entityArrayList) {
+            PhysicsHandler.world.destroyBody(e.physicsObject);
+        }
+
+        entityArrayList.clear();
+
         Entity player = new Entity("Player1","Player");
         player.physicsObject = PhysicsHandler.createPhysicsEntity(5, 5, 1, 2, true);
         entityArrayList.add(player);
         playerEntity = player;
+
+        for (int xSqr = 0; xSqr < WorldGrid.worldWidth; xSqr++) {
+            for (int ySqr = 0; ySqr < WorldGrid.worldHeight; ySqr++) {
+                if (ySqr == 0) {
+                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.ROCK);
+                }
+                else
+                {
+                    Main.worldGrid.setBlock(xSqr, ySqr, Tile.TileType.SKY);
+
+                }
+            }
+        }
     }
 
     public static Tile.TileType getBlockType(int x, int y) {

@@ -74,8 +74,14 @@ public class Interpreter {
             curBlock = curBlock.execute();
         }
         //start all the ticker scripts
+        //System.out.println(tickBlocks.size());
+        //for (com.mygdx.script.Blocks.Block b : tickBlocks) {
+            //((BlockOnTick)b).ticker.tickScript = b;
+        //}
         for (com.mygdx.script.Blocks.Block b : tickBlocks) {
-            ((BlockOnTick)b).ticker.tickScript = b;
+            if (((BlockOnTick)b).ticker.equals("Player1")) {
+                WorldGrid.playerEntity.tickScript.add(b);
+            }
         }
     }
 
@@ -159,7 +165,7 @@ public class Interpreter {
                 yB = new BlockMoveEntity(innerNodes.get("[MoveX]"),innerNodes.get("[MoveY]"));
                 break;
             case ONTICK_TRIGGER:
-                yB = new BlockOnTick(getEntityFrom(innerNodes.get("[EntityName]")));
+                yB = new BlockOnTick((innerNodes.get("[EntityName]")));
                 break;
         }
         //yB is yueyangBlock, bB is baileyBlock

@@ -3,6 +3,7 @@ package com.mygdx.script.Blocks;
 import com.mygdx.game.Main;
 import com.mygdx.game.entites.Entity;
 import com.mygdx.game.physics.PhysicsHandler;
+import com.mygdx.game.world.WorldGrid;
 import com.mygdx.script.TestScript.Interpreter;
 
 public class BlockSpawnEntity extends Block {
@@ -33,6 +34,13 @@ public class BlockSpawnEntity extends Block {
         System.out.println("Spawned entity " + entityName + " of type " + entityType);
 
         Main.worldGrid.getEntityArrayList().add(e);
+
+        //add tick script to new entities
+        for (Block b : Interpreter.tickBlocks) {
+            if (((BlockOnTick)b).ticker.equals(entityName)) {
+                e.tickScript.add(b);
+            }
+        }
     }
 }
 

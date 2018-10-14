@@ -19,7 +19,9 @@ public class BlockAssignVariable extends Block {
         //System.out.println(varVal);
         String v = ""+Interpreter.resolveVariable(varVal);
         Interpreter.variables.put(varName,v);
-        Interpreter.relevantEntity.giveVariable(varName,Integer.parseInt(v));
+        if (Interpreter.relevantEntity != null) {
+            Interpreter.relevantEntity.giveVariable(varName, Integer.parseInt(v));
+        }
     }
 
 

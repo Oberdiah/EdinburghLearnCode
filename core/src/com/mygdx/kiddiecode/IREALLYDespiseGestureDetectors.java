@@ -21,13 +21,18 @@ public class IREALLYDespiseGestureDetectors extends GestureDetector {
         //    MasterClass.setStartTerminalNode(null);
         //}
 
-        y = (int) Block.progCoord(y);
-        if (y > 0) {
-            if (y < Gdx.graphics.getWidth() / 5) {
-                if (x > Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2) {
 
-                    System.out.println("clicked screen!" + x + "," + y);
-                    if (x < Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2 + Gdx.graphics.getWidth() / 5) {
+
+
+
+
+
+
+        y = (int) Block.progCoord(y);
+        if (y > Main.goToCodeButton.getY()) {
+            if (y< Main.goToCodeButton.getHeight()+Main.goToCodeButton.getY()) {
+                if (x > Main.goToCodeButton.getX()) {
+                    if (x < Main.goToCodeButton.getX()+Main.goToCodeButton.getWidth()) {
 
                         Main.codemode = !Main.codemode;
                         if (Main.codemode == true) {
@@ -42,13 +47,28 @@ public class IREALLYDespiseGestureDetectors extends GestureDetector {
                 }
 
                 //add new button
-                if (x > Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 4) {
+                if (x > Main.addBlockButton.getX()) {
 
-                    if (x < Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 4 + Gdx.graphics.getWidth() / 5) {
+                    if (x < Main.addBlockButton.getX() + Main.addBlockButton.getWidth()) {
 
                         Gdx.input.getTextInput(Main.codeblockSearcher, "Find Block", "", "");
                     }
                 }
+
+                if (x > Main.saveButton.getX()) {
+
+                    if (x < Main.saveButton.getX() + Main.saveButton.getWidth()) {
+                        Gdx.input.getTextInput(Main.sh, "Save as", "", "");
+                    }
+                }
+
+                if (x > Main.loadButton.getX()) {
+
+                    if (x < Main.loadButton.getX() + Main.loadButton.getWidth()) {
+                        Gdx.input.getTextInput(Main.lh, "Load script", "", "");
+                    }
+                }
+
 
             }
 

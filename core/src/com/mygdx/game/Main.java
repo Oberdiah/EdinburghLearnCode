@@ -140,6 +140,9 @@ public class Main extends ApplicationAdapter {
         reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
         stage.addActor(reloadCodeButton);
 
+        //stage.addActor(goToCodeButton);
+        //stage.addActor(reloadCodeButton);
+
         //KiddieCode stuff
         Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
 
@@ -208,6 +211,7 @@ public class Main extends ApplicationAdapter {
 
                     p1deltaX = ((Touchpad) actor).getKnobPercentX();
                     p1deltaY = ((Touchpad) actor).getKnobPercentY();
+                    //System.out.println(deltaX+" "+deltaY);
 
 
                 }
@@ -285,7 +289,7 @@ public class Main extends ApplicationAdapter {
             //stage.draw();
 
         } else {
-            
+
             //Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
 
             Gdx.input.setInputProcessor(gesture);
@@ -333,6 +337,8 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
+        goToCodeButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
         touchpad.setBounds(0, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
         touchpad2.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 5, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
 

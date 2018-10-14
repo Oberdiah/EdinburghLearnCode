@@ -7,6 +7,7 @@ import com.mygdx.game.input.HandleInput;
 
 public class IREALLYDespiseGestureDetectors extends GestureDetector {
     private IHateGestureListeners blahblahblah;
+
     public IREALLYDespiseGestureDetectors(GestureListener listener) {
         super(listener);
         blahblahblah = (IHateGestureListeners) listener;
@@ -15,19 +16,19 @@ public class IREALLYDespiseGestureDetectors extends GestureDetector {
     @Override
     public boolean touchUp(int x, int y, int pointer, int button) {
         //System.out.println("Touch up!");
-        super.touchUp(x,y,pointer,button);
+        super.touchUp(x, y, pointer, button);
         //if (MasterClass.getStartTerminalNode() != null) {
         //    MasterClass.setStartTerminalNode(null);
         //}
 
-        y=(int)Block.progCoord(y);
-        if (x>Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/ 2){
+        y = (int) Block.progCoord(y);
+        if (y > 0) {
+            if (y < Gdx.graphics.getWidth() / 5) {
+                if (x > Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2) {
 
+                    System.out.println("clicked screen!" + x + "," + y);
+                    if (x < Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 2 + Gdx.graphics.getWidth() / 5) {
 
-            if (y >0){
-                System.out.println("clicked screen!"+x+","+y);
-                if (x <Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/ 2+ Gdx.graphics.getWidth() / 5){
-                    if (y < Gdx.graphics.getWidth() / 5){
                         Main.codemode = !Main.codemode;
                         if (Main.codemode == true) {
                             HandleInput.gameZoom = Main.cam.zoom;
@@ -40,11 +41,19 @@ public class IREALLYDespiseGestureDetectors extends GestureDetector {
 
                 }
 
+                //add new button
+                if (x > Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 4) {
+
+                    if (x < Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 4 + Gdx.graphics.getWidth() / 5) {
+
+                        Gdx.input.getTextInput(Main.codeblockSearcher, "Find Block", "", "");
+                    }
+                }
+
             }
 
+
         }
-
-
 
 
         blahblahblah.releaseDragData();

@@ -78,6 +78,7 @@ public class Main extends ApplicationAdapter {
     //buttons
     public static TextButton goToCodeButton;
     static  TextButton reloadCodeButton;
+    static  TextButton addBlockButton;
 
     @Override
     public void create() {
@@ -138,6 +139,12 @@ public class Main extends ApplicationAdapter {
         reloadCodeButton = new TextButton("RELOAD", textButtonStyle);
         reloadCodeButton.setBounds(Gdx.graphics.getWidth() - 3* Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
         stage.addActor(reloadCodeButton);
+
+        addBlockButton = new TextButton("ADD BLOCK", textButtonStyle);
+        addBlockButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+        stage.addActor(addBlockButton);
+
+
 
         //KiddieCode stuff
         Gdx.input.setInputProcessor(new IREALLYDespiseGestureDetectors(new IHateGestureListeners(this)));
@@ -266,6 +273,7 @@ public class Main extends ApplicationAdapter {
 
             reloadCodeButton.addListener(new ClickListener() {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
                     Main.worldGrid.resetWorld();
                     Interpreter.initializeInterpreter();
                     Interpreter.interpret();
@@ -300,7 +308,7 @@ public class Main extends ApplicationAdapter {
             SpriteBatch sb = new SpriteBatch();
             sb.begin();
             goToCodeButton.draw(sb,0.6f);
-
+            addBlockButton.draw(sb,0.6f);
             //Circle TEMP = getAllNodes().get(0).boundCircle();
             //shapeRenderer.setColor(0,0,1,1);
             //shapeRenderer.circle(TEMP.x,TEMP.y,TEMP.radius);

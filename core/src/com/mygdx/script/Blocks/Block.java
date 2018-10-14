@@ -26,6 +26,7 @@ abstract public class Block {
                 return newnext;
             }
             else {
+                removeVars();
                 Interpreter.relevantEntity = null;
                 return null;
             }
@@ -40,7 +41,21 @@ abstract public class Block {
         }
         else {
             Interpreter.relevantEntity = null;
+            removeVars();
             return null;
+        }
+    }
+
+    private void removeVars() {
+        if (Interpreter.relevantEntity != null) {
+            for (String vname : Interpreter.relevantEntity.exposedVariables.keySet()) {
+                //remove all local variables, store in exposedVariables though
+                String temp = Interpreter.variables.get(vname);
+                if (temp != null) {
+                    Interpreter.relevantEntity.exposedVariables.put(vname, Integer.parseInt(temp));
+                }
+                Interpreter.variables.put(vname, null);
+            }
         }
     }
 

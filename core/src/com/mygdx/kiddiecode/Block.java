@@ -37,10 +37,11 @@ public class Block {
     }
 
     public void draw() {
-        if (type == BlockTypes.ONLOAD_TRIGGER) {
+        if (type == BlockTypes.ONLOAD_TRIGGER || type == BlockTypes.ONTICK_TRIGGER) {
             shupooey.setColor(1, 0, 0, 1);
         }
-        else if (type == BlockTypes.IF_LESS_THAN) {
+        else if (type == BlockTypes.IF_LESS_THAN || type == BlockTypes.IF_EQUAL_TO
+                || type == BlockTypes.PLACE_BLOCK.IF_GREATER_THAN || type == BlockTypes.IF_NOT_EQUAL_TO) {
             shupooey.setColor(0, 0.7f, 0, 1);
         }
         else {
@@ -88,6 +89,15 @@ public class Block {
         }
         else if (type == BlockTypes.IF_LESS_THAN) {
             str = "If [Val1] Less Than [Val2]";
+        }
+        else if (type == BlockTypes.IF_GREATER_THAN) {
+            str = "If [Val1] Greater Than [Val2]";
+        }
+        else if (type == BlockTypes.IF_NOT_EQUAL_TO) {
+            str = "If [Val1] Not Equal To [Val2]";
+        }
+        else if (type == BlockTypes.IF_EQUAL_TO) {
+            str = "If [Val1] Equal To [Val2]";
         }
         else if (type == BlockTypes.LOOP_FROM_TO) {
             str = "Loop [Var] From [ValLower] To [ValUpper]";
@@ -145,7 +155,7 @@ public class Block {
         if (type == BlockTypes.ONLOAD_TRIGGER) {
             outgoingNodes.addAll(makeNodes(1,false));//outgoing: next line
         }
-        else if (type == BlockTypes.IF_LESS_THAN) {
+        else if (type == BlockTypes.IF_LESS_THAN || type == BlockTypes.IF_GREATER_THAN || type == BlockTypes.IF_EQUAL_TO || type == BlockTypes.IF_NOT_EQUAL_TO) {
             incomingNodes.addAll(makeNodes(1,true));//incoming: prev line,
             outgoingNodes.addAll(makeNodes(2,false));//outgoing: next line when true, next line when false
             innerNodes.put("[Val1]","0");

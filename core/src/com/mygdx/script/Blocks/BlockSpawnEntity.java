@@ -33,6 +33,9 @@ public class BlockSpawnEntity extends Block {
 
         } else if (entityType.equals("Square")) {
             e.physicsObject = PhysicsHandler.createPhysicsEntity(x, y, 1, 1, false);
+        } else if (entityType.equals("Floatie")) {
+            e.physicsObject = PhysicsHandler.createPhysicsEntity(x, y, 1, 1, false);
+            e.physicsObject.setGravityScale(0);
         } else { //by default
             e.physicsObject = PhysicsHandler.createPhysicsEntity(x, y, 1, 1, false);
         }

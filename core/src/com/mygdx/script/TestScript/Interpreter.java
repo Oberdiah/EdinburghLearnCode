@@ -142,6 +142,12 @@ public class Interpreter {
                         innerNodes.get("[MoveY]")
                 );
                 break;
+            case SPAWN_ENTITY_AT:
+                yB = new BlockSpawnEntity(innerNodes.get("[EntityName]"),
+                        innerNodes.get("[EntityType]"),
+                        innerNodes.get("[PosX]"),
+                        innerNodes.get("[PosY]"));
+                break;
             case ONTICK_TRIGGER:
                 yB = new BlockOnTick(getEntityFrom(innerNodes.get("[EntityName]")));
                 break;

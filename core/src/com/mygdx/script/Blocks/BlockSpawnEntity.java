@@ -9,18 +9,20 @@ public class BlockSpawnEntity extends Block {
     public Entity ticker;
 
     private String entityName;
+    private String entityType;
     private String posX;
     private String posY;
 
-    public BlockSpawnEntity(String eN,String px,String py) {
+    public BlockSpawnEntity(String eN,String eType,String px,String py) {
         entityName = eN;
+        entityType = eType;
         posX = px;
         posY = py;
     }
 
     @Override
     protected void functionality() {
-        Entity e = new Entity(entityName);
+        Entity e = new Entity(entityName,entityType);
 
         int x = Interpreter.resolveVariable(posX);
         int y = Interpreter.resolveVariable(posY);

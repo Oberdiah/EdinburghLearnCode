@@ -118,7 +118,7 @@ public class Block {
             str = "Move Player by ([MoveX],[MoveY])";
         }
         else if (type == BlockTypes.SPAWN_ENTITY_AT) {
-            str = "Spawn Entity With Name: [EntityName] at ([PosX],[PosY])";
+            str = "Spawn Entity [EntityName] of Type [EntityType] at ([PosX],[PosY])";
         }
         for (String k : innerNodes.keySet()) {
             str = str.replaceAll(Pattern.quote(k),innerNodes.get(k));

@@ -60,7 +60,7 @@ public class MainRenderer {
         for (Entity e : Main.worldGrid.getEntityArrayList()) {
             // Get current frame of animation for the current stateTime
             TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
-            Body physicsObj = WorldGrid.playerEntity.physicsObject;
+            Body physicsObj = e.physicsObject;
             Vector2 position = physicsObj.getPosition();
             float width = 1;
             float height = 2;

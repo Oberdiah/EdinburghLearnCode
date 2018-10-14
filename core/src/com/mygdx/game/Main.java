@@ -83,6 +83,7 @@ public class Main extends ApplicationAdapter {
     public static  TextButton saveButton;
     public static  TextButton loadButton;
 
+
     @Override
     public void create() {
         renderer = new MainRenderer();
@@ -125,8 +126,6 @@ public class Main extends ApplicationAdapter {
         addBlockButton = new TextButton("ADD BLOCK", textButtonStyle);
         addBlockButton.setBounds(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 4, 0, Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
         stage.addActor(addBlockButton);
-
-
 
 
 
@@ -311,6 +310,7 @@ public class Main extends ApplicationAdapter {
             touchpad2.draw(batch, 0.6f);
             goToCodeButton.draw(batch,0.6f);
             reloadCodeButton.draw(batch,0.6f);
+
             batch.end();
             //stage.act();
             //stage.draw();
@@ -333,6 +333,7 @@ public class Main extends ApplicationAdapter {
             addBlockButton.draw(sb,0.6f);
             loadButton.draw(sb,0.6f);
             saveButton.draw(sb,0.6f);
+            sb.end();
             //Circle TEMP = getAllNodes().get(0).boundCircle();
             //shapeRenderer.setColor(0,0,1,1);
             //shapeRenderer.circle(TEMP.x,TEMP.y,TEMP.radius);

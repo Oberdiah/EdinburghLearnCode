@@ -17,13 +17,13 @@ public class MainRenderer {
     public static SpriteBatch batch;
     public static Texture rockblock;
     public static Texture squareblock;
-    public static Texture ufo;
+    public static Texture ufoSheet;
 
     public void init() {
         batch = new SpriteBatch();
         rockblock = new Texture("rockblock.png");
         squareblock = new Texture("square.png");
-        ufo = new Texture("flyingsaucer.png");
+        ufoSheet = new Texture("flyingsaucer.png");
         sky = new Texture("skyblock.png");
         sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         float w = Gdx.graphics.getWidth();
@@ -55,6 +55,7 @@ public class MainRenderer {
     }
 
     Animation<TextureRegion> walkAnimation;
+    Animation<TextureRegion> ufoAnimation;
     Texture walkSheet;
     float stateTime;
 
@@ -78,7 +79,8 @@ public class MainRenderer {
             } else if (e.type.equals("Floatie")) {
                 float width = 1;
                 float height = 1;
-                batch.draw(new TextureRegion(ufo), position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
+                TextureRegion currentFrame = ufoAnimation.getKeyFrame(stateTime,true);
+                batch.draw(currentFrame, position.x-width/2, position.y-height/2, width/2, height/2, width, height, 1,1,physicsObj.getAngle()*180/3.14159f); // Draw current frame at (50, 50)
             } else  {//default
                 float width = 1;
                 float height = 1;
@@ -103,6 +105,20 @@ public class MainRenderer {
         }
 
         walkAnimation = new Animation<>(0.25f, walkFrames);
+
+        //ufo
+        ufoSheet = new Texture("flyingsaucer.png");
+        tmp = TextureRegion.split(ufoSheet,
+                ufoSheet.getWidth() / 7,
+                ufoSheet.getHeight());
+
+        TextureRegion[] ufoFrames = new TextureRegion[7];
+        index = 0;
+        for (int j = 0; j < 7; j++) {
+            ufoFrames[index++] = tmp[0][j];
+        }
+
+        ufoAnimation = new Animation<>(0.25f, ufoFrames);
 
         stateTime = 0f;
     }

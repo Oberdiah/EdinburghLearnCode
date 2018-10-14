@@ -11,6 +11,7 @@ public class BlockOnTickClass extends BlockTicker {
     public BlockOnTickClass(String e) {
         //ticker = e;
         super(e);
+        classwise = true;
     }
 
     @Override

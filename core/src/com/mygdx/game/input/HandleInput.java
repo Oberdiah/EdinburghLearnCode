@@ -54,17 +54,17 @@ public class HandleInput {
         }
 
 
-        /*if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            if (!Main.codemode) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            if (Main.codemode) {
                 cam.zoom *= 1.02;
             }
             //System.out.println(cam.zoom);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            if (!Main.codemode) {//code zooming is STUPID it sucks DON'T do it bro
+            if (Main.codemode) {//code zooming is STUPID it sucks DON'T do it bro
                 cam.zoom *= 0.98;
             }
-        }*/
+        }
 //        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 //            cam.rotate(-0.5f, 0, 0, 1);
 //        }

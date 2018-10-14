@@ -15,8 +15,8 @@ public class HandleInput {
 
     public static final float CODE_ZOOM = 21.329294f;
 
-    private float gameZoom = 1;
-    private float codeZoom = CODE_ZOOM;
+    public static float gameZoom = 1;
+    public static float codeZoom = CODE_ZOOM;
 
     public void handleInput(OrthographicCamera cam) {
 

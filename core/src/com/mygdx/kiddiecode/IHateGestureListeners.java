@@ -177,6 +177,8 @@ public class IHateGestureListeners implements GestureListener {
         }else{
             Main.cam.zoom = 0;
         }
+
+
         return false;
     }
 

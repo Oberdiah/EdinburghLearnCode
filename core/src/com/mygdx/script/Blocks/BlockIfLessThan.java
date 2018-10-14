@@ -27,6 +27,8 @@ public class BlockIfLessThan extends Block {
             setTempNext(ifFalse);
             useTempNext = true;
         }
-        Interpreter.nullJumpers.add(after);
+        if (after!=null) {
+            Interpreter.nullJumpers.add(after);
+        }
     }
 }
